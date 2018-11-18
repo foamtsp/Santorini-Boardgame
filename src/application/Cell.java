@@ -1,5 +1,5 @@
 package application;
 
-public class Board {
-	
+public class Cell {
+
 }
