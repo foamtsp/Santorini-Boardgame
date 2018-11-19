@@ -1,6 +1,7 @@
 package application.Process;
 
 import application.Process.Cell.Cell;
+import application.Process.Cell.Tower;
 
 public class Board implements BoardInterface{
 
@@ -81,7 +82,19 @@ public class Board implements BoardInterface{
 	@Override
 	public Player getTurn() {
 		// TODO Auto-generated method stub
-		return null;
+		if (p1Turn) {
+			return p1;
+		} else {
+			return p2;
+		}
 	}
+	
+	public Tower promotion(Cell c) {
+		Tower t = new Tower(c.getLocation());
+		return t;
+		
+	}
+	
+	
 	
 }
