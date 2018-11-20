@@ -1,6 +1,8 @@
 package application.Process.Players;
 
 
+import java.util.ArrayList;
+
 import application.Process.Location;
 
 public class Player implements Movable,Bulidable {
@@ -45,7 +47,27 @@ public class Player implements Movable,Bulidable {
 		else return false;
 			
 	}
-
+	@Override
+	public ArrayList<Location> tryAllMove() {
+		// TODO Auto-generated method stub
+		ArrayList<Location> allMovesPossible =  new ArrayList<Location>();
+		int x = getCurrentLocation().getX();
+		int y  = getCurrentLocation().getY();
+		
+		Location Up = new Location(y+1,x); if(Up.onGrid()) allMovesPossible.add(Up);
+		Location Down = new Location(y-1,x); if(Down.onGrid()) allMovesPossible.add(Down);
+		Location Right = new Location(y,x+1); if(Right.onGrid()) allMovesPossible.add(Right);
+		Location Left = new Location(y,x-1); if(Left.onGrid()) allMovesPossible.add(Left);
+		Location UpRight = new Location(y+1,x+1); if(UpRight.onGrid()) allMovesPossible.add(UpRight);
+		Location UpLeft = new Location(y+1,x-1); if(UpLeft.onGrid()) allMovesPossible.add(UpLeft);
+		Location DownRight = new Location(y-1,x+1); if(DownRight.onGrid()) allMovesPossible.add(DownRight);
+		Location DownLeft = new Location(y-1,x-1); if(DownLeft.onGrid()) allMovesPossible.add(DownLeft);
+		
+		return allMovesPossible;
+		
+		
+	}
+	
 	@Override
 	public void tryBuild(Location location) {
 		// TODO Auto-generated method stub

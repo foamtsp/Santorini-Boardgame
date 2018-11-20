@@ -8,5 +8,7 @@ public interface Movable {
 	
 
 	boolean tryMove(Location newLocation);
+
+	ArrayList<Location> tryAllMove();
 	 
 }
