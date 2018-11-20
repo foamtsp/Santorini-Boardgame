@@ -9,6 +9,8 @@ public interface BoardInterface {
 
 	void move(Player p,Location newLocation) throws InvalidMoveException;
 	
+	void jump(Player p,Location newLocation) throws InvalidMoveException;
+	
 	void build(Player p,Location location) throws InvalidBuildException;
 	
 	boolean isGameOver();

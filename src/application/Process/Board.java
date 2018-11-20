@@ -53,6 +53,24 @@ public class Board implements BoardInterface{
 			this.p1Turn = !this.p1Turn;
 		}
 	}
+	
+	public void jump(Player p,Location newLocation) throws InvalidMoveException {
+		int currentX = p.getCurrentLocation().getX();
+		int currentY = p.getCurrentLocation().getY();
+		
+		int targetX = newLocation.getX();
+		int targetY = newLocation.getY();
+		
+		Cell currentCell = grid[currentY][currentX];
+		Cell targetCell = grid[targetY][targetX];
+		
+		int diffLevel = Math.abs(currentCell.getLevel()-targetCell.getLevel());
+		
+		if(targetCell instanceof Tower && diffLevel <= 1 && diffLevel >=0) {
+			move(p,newLocation);
+		}
+		else return;
+	}
 
 	@Override
 	public void build(Player p, Location location) throws InvalidBuildException{
@@ -67,15 +85,13 @@ public class Board implements BoardInterface{
 	}
 
 	@Override
-	public boolean isWinner(Player player) {
+	public boolean isWinner(Player player) { 
 		// TODO Auto-generated method stub
-		int x1 = player.getCurrentLocation().getX();
-		int y1 = player.getCurrentLocation().getY();
+		int x = player.getCurrentLocation().getX();
+		int y = player.getCurrentLocation().getY();
 
-		int x2 = player.getCurrentLocation().getX();
-		int y2 = player.getCurrentLocation().getY();
 
-		if (grid[y1][x1].getLevel() == 3 || grid[y2][x2].getLevel() == 3
+		if (grid[y][x].getLevel() == 3 
 				|| ((player == p1) && hasNoMoves(p2) && getTurn() == p2)
 				|| ((player == p2) && hasNoMoves(p1) && getTurn() == p1)) {
 			return true;

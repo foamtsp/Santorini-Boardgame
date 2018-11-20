@@ -1,18 +1,25 @@
 package application.Process.Players;
 
-import java.util.ArrayList;
 
 import application.Process.Location;
 
 public class Player implements Movable,Bulidable {
 	private String name;
 	private Location currentLocation;
-	private ArrayList possibleMoves;
-	private ArrayList possibleBuild;
+	private int onLevel = 0;
 	
 	public Player(String name) {
 		this.name = name;
 		this.currentLocation = new Location(0,0);
+		this.onLevel = 0;
+	}
+
+	public int getOnLevel() {
+		return onLevel;
+	}
+
+	public void setOnLevel(int onLevel) {
+		this.onLevel = onLevel;
 	}
 
 	public String getName() {
