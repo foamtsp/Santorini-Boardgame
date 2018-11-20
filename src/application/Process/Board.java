@@ -1,5 +1,7 @@
 package application.Process;
 
+import java.util.ArrayList;
+
 import application.Process.Cell.Cell;
 import application.Process.Cell.Tower;
 import application.Process.Exception.InvalidBuildException;
@@ -39,7 +41,7 @@ public class Board implements BoardInterface{
 		// TODO Auto-generated method stub
 		if (!(p.tryMove(newLocation))|| isGameOver() || (p1Turn && p == p2)
 				|| ((!(p1Turn) && p == p1))
-				|| !(canMove(newLocation)) || isMoved() || !isBuilded()) {
+				|| !(canMove(p,newLocation)) || isMoved() || !isBuilded()) {
 			throw new InvalidMoveException();
 		} else {
 			
@@ -62,7 +64,7 @@ public class Board implements BoardInterface{
 		int targetY = newLocation.getY();
 		
 		Cell currentCell = grid[currentY][currentX];
-		Cell targetCell = grid[targetY][targetX];
+		Tower targetCell = (Tower) grid[targetY][targetX];
 		
 		if(currentCell.getLevel() == 4 || targetCell.getLevel() == 4) {
 			throw new InvalidMoveException();
@@ -105,9 +107,22 @@ public class Board implements BoardInterface{
 	}
 
 	@Override
-	public boolean hasNoMoves(Player player) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean hasNoMoves(Player p) {
+		ArrayList<Location> pMoves = new ArrayList<Location>();
+		
+		pMoves.addAll(p.tryAllMove());
+		boolean hasMoves = false;
+
+		if (pMoves.isEmpty()) {
+			return true;
+		}
+
+		while (!pMoves.isEmpty()) {
+			hasMoves = hasMoves
+					| canMove(p, pMoves.remove(0));
+		}
+
+		return !hasMoves;
 	}
 
 	@Override
@@ -123,9 +138,26 @@ public class Board implements BoardInterface{
 	}
 
 	@Override
-	public boolean canMove(Location location) {
+	public boolean canMove(Player p, Location location) {
 		// TODO Auto-generated method stub
-		return false;
+		if (location == null) {
+			return false;
+		}
+
+		Cell currentCell = grid[p.getCurrentLocation().getY()][p.getCurrentLocation().getX()];
+		int currentLevel = currentCell.getLevel();
+
+		Cell targetCell = grid[location.getY()][location.getX()];
+		int targetLevel = targetCell.getLevel();
+
+		if (!(p.tryMove(location))
+				|| ((Tower) targetCell).isDestroyed()
+				|| ((targetLevel > currentLevel) && (targetLevel - currentLevel > 1))
+				|| targetCell.getPlayer() != null) {
+			return false;
+		}
+		return true;
+
 	}
 
 	@Override
@@ -192,6 +224,8 @@ public class Board implements BoardInterface{
 	public void setP1Turn(boolean p1Turn) {
 		this.p1Turn = p1Turn;
 	}
+
+	
 
 	
 
