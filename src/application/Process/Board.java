@@ -64,12 +64,16 @@ public class Board implements BoardInterface{
 		Cell currentCell = grid[currentY][currentX];
 		Cell targetCell = grid[targetY][targetX];
 		
+		if(currentCell.getLevel() == 4 || targetCell.getLevel() == 4) {
+			throw new InvalidMoveException();
+		}
+		
 		int diffLevel = Math.abs(currentCell.getLevel()-targetCell.getLevel());
 		
 		if(targetCell instanceof Tower && diffLevel <= 1 && diffLevel >=0) {
 			move(p,newLocation);
 		}
-		else return;
+		else throw new InvalidMoveException();
 	}
 
 	@Override
