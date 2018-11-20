@@ -1,12 +1,16 @@
 package application.Process;
 
+import application.Process.Exception.InvalidBuildException;
+import application.Process.Exception.InvalidMoveException;
+import application.Process.Players.Player;
+
 public interface BoardInterface {
 	int SIDE = 5;
 
-	void move(Location newLocation);
-
-	void build(Location newLocation);
-
+	void move(Player p,Location newLocation) throws InvalidMoveException;
+	
+	void build(Player p,Location location) throws InvalidBuildException;
+	
 	boolean isGameOver();
 
 	boolean isWinner(Player player);
@@ -20,5 +24,6 @@ public interface BoardInterface {
 	boolean canBuild(Location location);
 
 	Player getTurn();
+
 
 }

@@ -1,7 +1,7 @@
 package application.Process.Cell;
 
 import application.Process.Location;
-import application.Process.Player;
+import application.Process.Players.Player;
 
 public class Cell {
 	protected Player player;
@@ -37,6 +37,11 @@ public class Cell {
 
 	public void setLocation(Location loc) {
 		this.location = loc;
+	}
+
+	public int getLevel() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 	
 

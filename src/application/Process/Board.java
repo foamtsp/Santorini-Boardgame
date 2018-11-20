@@ -2,13 +2,16 @@ package application.Process;
 
 import application.Process.Cell.Cell;
 import application.Process.Cell.Tower;
+import application.Process.Exception.InvalidBuildException;
+import application.Process.Exception.InvalidMoveException;
+import application.Process.Players.Player;
 
 public class Board implements BoardInterface{
 
 	private Cell[][] grid = new Cell[SIDE][SIDE];
 	private Player p1, p2;
 	private boolean moved = false;
-	private boolean placed = true;
+	private boolean builded = true;
 	private boolean p1Turn = true;
 	
 	public Board(Player p1, Player p2) {
@@ -27,31 +30,57 @@ public class Board implements BoardInterface{
 		int x2 = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
 		int y2 = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
 		
-		grid[x1][y1].setPlayer(p1);
-		grid[x2][y2].setPlayer(p2);
+		grid[y1][x1].setPlayer(p1);
+		grid[y2][x2].setPlayer(p2);
+	}
+
+	@Override
+	public void move(Player p, Location newLocation) throws InvalidMoveException{
+		// TODO Auto-generated method stub
+		if (!(p.tryMove(newLocation))|| isGameOver() || (p1Turn && p == p2)
+				|| ((!(p1Turn) && p == p1))
+				|| !(canMove(newLocation)) || isMoved() || !isBuilded()) {
+			throw new InvalidMoveException();
+		} else {
+			
+			int targetX = newLocation.getX();
+			int targetY = newLocation.getY();
+
+			grid[targetY][targetX].setPlayer(p);
+			grid[p.getCurrentLocation().getY()][p.getCurrentLocation().getX()].setPlayer(null);
+			this.moved = true;
+			this.builded = false;
+			this.p1Turn = !this.p1Turn;
+		}
+	}
+
+	@Override
+	public void build(Player p, Location location) throws InvalidBuildException{
+		// TODO Auto-generated method stub
+		
 	}
 	
 	@Override
-	public void move(Location newLocation) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void build(Location newLocation) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public boolean isGameOver() {
 		// TODO Auto-generated method stub
-		return false;
+		return isWinner(p1) || isWinner(p2);
 	}
 
 	@Override
 	public boolean isWinner(Player player) {
 		// TODO Auto-generated method stub
+		int x1 = player.getCurrentLocation().getX();
+		int y1 = player.getCurrentLocation().getY();
+
+		int x2 = player.getCurrentLocation().getX();
+		int y2 = player.getCurrentLocation().getY();
+
+		if (grid[y1][x1].getLevel() == 3 || grid[y2][x2].getLevel() == 3
+				|| ((player == p1) && hasNoMoves(p2) && getTurn() == p2)
+				|| ((player == p2) && hasNoMoves(p1) && getTurn() == p1)) {
+			return true;
+		}
+
 		return false;
 	}
 
@@ -64,7 +93,13 @@ public class Board implements BoardInterface{
 	@Override
 	public Player getWinner() {
 		// TODO Auto-generated method stub
-		return null;
+		if (isWinner(p1)) {
+			return p1;
+		} else if (isWinner(p2)) {
+			return p2;
+		} else {
+			return null;
+		}
 	}
 
 	@Override
@@ -89,12 +124,56 @@ public class Board implements BoardInterface{
 		}
 	}
 	
-	public Tower promotion(Cell c) {
-		Tower t = new Tower(c.getLocation());
-		return t;
-		
+	
+	public Cell[][] getGrid() {
+		return grid;
 	}
+
+	public void setGrid(Cell[][] grid) {
+		this.grid = grid;
+	}
+
+	public Player getP1() {
+		return p1;
+	}
+
+	public void setP1(Player p1) {
+		this.p1 = p1;
+	}
+
+	public Player getP2() {
+		return p2;
+	}
+
+	public void setP2(Player p2) {
+		this.p2 = p2;
+	}
+
+	public boolean isMoved() {
+		return moved;
+	}
+
+	public void setMoved(boolean moved) {
+		this.moved = moved;
+	}
+
+	public boolean isBuilded() {
+		return builded;
+	}
+
+	public void setBuilded(boolean builded) {
+		this.builded = builded;
+	}
+
+	public boolean isP1Turn() {
+		return p1Turn;
+	}
+
+	public void setP1Turn(boolean p1Turn) {
+		this.p1Turn = p1Turn;
+	}
+
 	
-	
+
 	
 }
