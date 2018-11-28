@@ -69,8 +69,21 @@ public class Player implements Movable,Bulidable {
 	}
 	
 	@Override
-	public void tryBuild(Location location) {
+	public boolean tryBuild(Location location) {
 		// TODO Auto-generated method stub
+		int x = getCurrentLocation().getX();
+		int y  = getCurrentLocation().getY();
+		int newX = location.getX();
+		int newY = location.getY();
+		
+		int up = y+1;
+		int down = y-1;
+		int right = x+1;
+		int left = x-1;
+		
+		if((newX>=left && newX<=right) && (newY>=down && newY<=up)) return true;
+		else return false;
+		
 		
 	}
 	

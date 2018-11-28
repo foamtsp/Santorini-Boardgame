@@ -5,5 +5,5 @@ import application.Process.Location;
 public interface Bulidable {
 
 
-	void tryBuild(Location location);
+	boolean tryBuild(Location location);
 }

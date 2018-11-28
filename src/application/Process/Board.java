@@ -52,7 +52,6 @@ public class Board implements BoardInterface{
 			grid[p.getCurrentLocation().getY()][p.getCurrentLocation().getX()].setPlayer(null);
 			this.moved = true;
 			this.builded = false;
-			this.p1Turn = !this.p1Turn;
 		}
 	}
 	
@@ -66,13 +65,13 @@ public class Board implements BoardInterface{
 		Cell currentCell = grid[currentY][currentX];
 		Tower targetCell = (Tower) grid[targetY][targetX];
 		
-		if(currentCell.getLevel() == 4 || targetCell.getLevel() == 4) {
+		if(targetCell.getLevel() == 4) {
 			throw new InvalidMoveException();
 		}
 		
-		int diffLevel = Math.abs(currentCell.getLevel()-targetCell.getLevel());
+		int diffLevel = targetCell.getLevel()-currentCell.getLevel();
 		
-		if(targetCell instanceof Tower && diffLevel <= 1 && diffLevel >=0) {
+		if(targetCell instanceof Tower && diffLevel <= 1) {
 			move(p,newLocation);
 		}
 		else throw new InvalidMoveException();
@@ -81,6 +80,28 @@ public class Board implements BoardInterface{
 	@Override
 	public void build(Player p, Location location) throws InvalidBuildException{
 		// TODO Auto-generated method stub
+		if (!(p.tryBuild(location))|| isGameOver() || (p1Turn && p == p2)
+				|| ((!(p1Turn) && p == p1))
+				|| !(canBuild(p,location)) || !isBuilded()) {
+			throw new InvalidBuildException();
+		} else {
+			
+			int targetX = location.getX();
+			int targetY = location.getY();
+
+			Cell current = grid[targetY][targetX];
+			if ( !(current instanceof Tower) && current.getLevel() == 0) {
+				Tower currentT = new Tower(location);
+				current = currentT;
+			}
+			else {
+				Tower currentT = (Tower) current;
+				currentT.addLevel();
+			}
+			this.moved = true;
+			this.builded = true;
+			this.p1Turn = !this.p1Turn;
+		}
 		
 	}
 	
@@ -161,9 +182,21 @@ public class Board implements BoardInterface{
 	}
 
 	@Override
-	public boolean canBuild(Location location) {
+	public boolean canBuild(Player p,Location location) {
 		// TODO Auto-generated method stub
-		return false;
+		if (location == null) {
+			return false;
+		}
+
+		Cell targetCell = grid[location.getY()][location.getX()];
+		int targetLevel = targetCell.getLevel();
+
+		if (!(p.tryBuild(location))
+				|| ((Tower) targetCell).isDestroyed()
+				|| targetCell.getPlayer() != null) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

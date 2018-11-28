@@ -23,9 +23,10 @@ public interface BoardInterface {
 
 	boolean canMove(Player p, Location location);
 	
-	boolean canBuild(Location location);
+	boolean canBuild(Player p, Location location);
 
 	Player getTurn();
+
 
 
 }
