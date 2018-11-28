@@ -5,7 +5,9 @@ import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 
@@ -23,8 +25,8 @@ public class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}*/
-		
 		MainPage mp = new MainPage();
+		
 		HBox hb = new HBox(10);
 		hb.setAlignment(Pos.BOTTOM_RIGHT);
 		Button pbtn = new Button("Play");		
@@ -38,16 +40,19 @@ public class Main extends Application {
 			
 		});
 		scene1 = new Scene(mp,400,400);
-		StackPane s = new StackPane();
+		FlowPane f = new FlowPane();
 		Button bbtn = new Button("Back");
-		s.getChildren().add(bbtn);
+		f.setPrefHeight(300);
+		f.setPrefWidth(150);
+		StatusPage s = new StatusPage();
+		f.getChildren().addAll(bbtn,s);
 		bbtn.setOnAction(e->{
 			primaryStage.setScene(scene1);
 			primaryStage.setTitle("Santorini");
 			primaryStage.show();
 			
 		});
-		scene2 = new Scene(s,400,400);
+		scene2 = new Scene(f,400,400);
 		primaryStage.setScene(scene1);
 		primaryStage.setTitle("Santorini");
 		primaryStage.show();
