@@ -14,10 +14,13 @@ import javafx.scene.layout.StackPane;
 
 public class Main extends Application {
 	Scene scene1,scene2;
+	String p1, p2;
+	StatusPage s;
 	@Override
 	public void start(Stage primaryStage) {
 		
 		MainPage mp = new MainPage();
+		primaryStage.setResizable(false);
 		
 		HBox hb = new HBox(10);
 		hb.setAlignment(Pos.BOTTOM_RIGHT);
@@ -26,17 +29,20 @@ public class Main extends Application {
 		hb.getChildren().addAll(pbtn,hbtn);
 		mp.add(hb, 1, 3);
 		pbtn.setOnAction(e->{
+			p1 = mp.t1.getText().trim();
+			p2 = mp.t2.getText().trim();
+			s.setPlayerName(mp.t1.getText().trim(), mp.t2.getText().trim());
 			primaryStage.setScene(scene2);
 			primaryStage.setTitle("Santorini");
 			primaryStage.show();
 			
 		});
-		scene1 = new Scene(mp,400,400);
+		scene1 = new Scene(mp,1000,600);
 		FlowPane f = new FlowPane();
 		Button bbtn = new Button("Back");
 		f.setPrefHeight(300);
 		f.setPrefWidth(150);
-		StatusPage s = new StatusPage();
+		s = new StatusPage();
 		f.getChildren().addAll(bbtn,s);
 		bbtn.setOnAction(e->{
 			primaryStage.setScene(scene1);
