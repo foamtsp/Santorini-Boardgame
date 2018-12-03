@@ -189,7 +189,6 @@ public class Board implements BoardInterface{
 		}
 
 		Cell targetCell = grid[location.getY()][location.getX()];
-		int targetLevel = targetCell.getLevel();
 
 		if (!(p.tryBuild(location))
 				|| ((Tower) targetCell).isDestroyed()
