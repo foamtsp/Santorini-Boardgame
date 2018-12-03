@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 
 
 public class Main extends Application {
@@ -38,19 +39,20 @@ public class Main extends Application {
 			
 		});
 		scene1 = new Scene(mp,1000,600);
-		FlowPane f = new FlowPane();
-		Button bbtn = new Button("Back");
+		VBox f = new VBox();
+		Button backBtn = new Button("Back");
 		f.setPrefHeight(300);
 		f.setPrefWidth(150);
 		s = new StatusPage();
-		f.getChildren().addAll(bbtn,s);
-		bbtn.setOnAction(e->{
+		f.getChildren().addAll(backBtn,s);
+		backBtn.setOnAction(e->{
 			primaryStage.setScene(scene1);
 			primaryStage.setTitle("Santorini");
+			
 			primaryStage.show();
 			
 		});
-		scene2 = new Scene(f,400,400);
+		scene2 = new Scene(f,1000,600);
 		primaryStage.setScene(scene1);
 		primaryStage.setTitle("Santorini");
 		primaryStage.show();
