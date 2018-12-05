@@ -57,7 +57,7 @@ public class Main extends Application {
 		f.setPrefHeight(300);
 		f.setPrefWidth(150);
 		s = new StatusPage();
-		s.moveBtn.setOnAction(e->{
+		/*s.moveBtn.setOnAction(e->{
 			if(board.isP1Turn()) board.move(player1, null);//mouse click event
 			else board.move(player2, null);
 		});
@@ -65,7 +65,7 @@ public class Main extends Application {
 			if(board.isP1Turn()) board.build(player1, null);//mouse click event
 			else board.build(player2, null);
 			s.changeTurn(board.isP1Turn());
-		});
+		});*/
 		f.getChildren().addAll(s,backBtn);
 		backBtn.setOnAction(e->{
 			primaryStage.setScene(scene1);

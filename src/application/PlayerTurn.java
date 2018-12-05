@@ -17,7 +17,7 @@ public class PlayerTurn extends HBox{
 	public PlayerTurn(String p) {
 		// TODO Auto-generated constructor stub
 		playerName = new Text(p);
-		playerName.setFont(Font.font("Serif",FontWeight.NORMAL,25));
+		playerName.setFont(Font.font("Serif",FontWeight.NORMAL,22));
 		canvas = new Canvas(30,30);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
@@ -25,7 +25,7 @@ public class PlayerTurn extends HBox{
 		this.setBackground(new Background(new BackgroundFill(Color.WHITE,null, null)));
 		this.setSpacing(15);
 		this.setPadding(new Insets(15,15,15,15));
-		this.setMaxWidth(200);
+		this.setMaxWidth(240);
 		this.getChildren().addAll(canvas,playerName);
 		//canvas.setVisible(false);
 	}

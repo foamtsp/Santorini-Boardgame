@@ -3,10 +3,14 @@ package application;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class StatusPage extends VBox{
 	PlayerTurn p1,p2;
@@ -15,19 +19,24 @@ public class StatusPage extends VBox{
 	public StatusPage() {
 		// TODO Auto-generated constructor stub
 		this.setSpacing(5);
-		this.setPadding(new Insets(5,5,5,5));;
-		this.setMaxWidth(200);
+		this.setPadding(new Insets(5,5,5,5));
+		this.setMaxWidth(250);
 		this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE,null, null)));
 		moveBtn = new Button("MOVE");
-		buildBtn = new Button("Build");
-		//this.getChildren().addAll(p1,p2,moveBtn,buildBtn);
+		buildBtn = new Button("BUILD");
 
 	}
 	public void setPlayerName(String n1,String n2) {
-		p1 = new PlayerTurn(n1);
-		p2 = new PlayerTurn(n2);
+		this.getChildren().clear();
+		Label pt = new Label("Player's turn:");
+		pt.setFont(Font.font("Serif",FontWeight.NORMAL,32));
+		p1 = new PlayerTurn("player1:"+n1);
+		p2 = new PlayerTurn("player2:"+n2);
 		p2.canvas.setVisible(false);
-		this.getChildren().addAll(p1,p2,moveBtn,buildBtn);
+		HBox btns = new HBox();
+		btns.setSpacing(20);
+		btns.getChildren().addAll(moveBtn,buildBtn);
+		this.getChildren().addAll(pt,p1,p2,btns);
 		//P2SP.setVisible(false);
 		
 	}
