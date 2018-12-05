@@ -1,45 +1,41 @@
 package application;
 
-import javafx.scene.shape.*;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
+
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 public class StatusPage extends VBox{
-	Label pt;
-	
-	
+	PlayerTurn p1,p2;
+	Button moveBtn;
+	Button buildBtn;
 	public StatusPage() {
 		// TODO Auto-generated constructor stub
-		this.setSpacing(15);
-		pt = new Label("Player's Turn:");
-		pt.setFont(Font.font("Serif",FontWeight.NORMAL,24));
-		this.getChildren().add(pt);
-	
+		this.setSpacing(5);
+		this.setPadding(new Insets(5,5,5,5));;
+		this.setMaxWidth(200);
+		this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE,null, null)));
+		moveBtn = new Button("MOVE");
+		buildBtn = new Button("Build");
+		//this.getChildren().addAll(p1,p2,moveBtn,buildBtn);
+
 	}
-	public void setPlayerName(String p1,String p2) {
-		VBox P1SP = createPlayerSelectPanel(p1);
-		VBox P2SP = createPlayerSelectPanel(p2);
-		this.getChildren().clear();
-		Text player1Name = new Text(p1);
-		Text player2Name = new Text(p2);
-		this.getChildren().addAll(player1Name,P1SP,player2Name,P2SP);
+	public void setPlayerName(String n1,String n2) {
+		p1 = new PlayerTurn(n1);
+		p2 = new PlayerTurn(n2);
+		p2.canvas.setVisible(false);
+		this.getChildren().addAll(p1,p2,moveBtn,buildBtn);
 		//P2SP.setVisible(false);
 		
 	}
-	
-	private VBox createPlayerSelectPanel(String p) {
-		VBox pNamePanel = new VBox();
-		Button moveBtn = new Button("MOVE");
-		Button buildBtn = new Button("Build");
-		pNamePanel.getChildren().addAll(moveBtn,buildBtn);
-		return pNamePanel;
+	public void changeTurn(boolean b) {
+		p1.canvas.setVisible(b);
+		p2.canvas.setVisible(!b);
 	}
+
+
 
 }
