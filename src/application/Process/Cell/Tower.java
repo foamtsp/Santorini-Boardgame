@@ -32,7 +32,12 @@ public class Tower extends Cell{
 	public int getLevel() {
 		return level;
 	}
-
+	
+	@Override
+	public int getZ() {
+		return 2;	
+	}
+	
 	public void addLevel() {
 		this.level++;
 		if (this.level > 3) {
