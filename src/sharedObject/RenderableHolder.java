@@ -5,6 +5,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import application.Process.Cell.Cell;
+import application.Process.Cell.Tower;
+import application.Process.Players.Player;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 
@@ -46,17 +49,10 @@ public class RenderableHolder {
 		entities.add(entity);
 		Collections.sort(entities, comparator);
 		for(IRenderable x: entities){
-			//if(x instanceof Tank) System.out.println("tank");
-			//if(x instanceof Mine) System.out.println("mine");
-			//if(x instanceof Field) System.out.println("field");
+			if(x instanceof Cell) System.out.println("Cell");
+			if(x instanceof Tower) System.out.println("Tower");
+			if(x instanceof Player) System.out.println("Player");
 			
-		}
-	}
-
-	public void update() {
-		for (int i = entities.size() - 1; i >= 0; i--) {
-			if (entities.get(i).isDestroyed())
-				entities.remove(i);
 		}
 	}
 

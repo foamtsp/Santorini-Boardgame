@@ -2,8 +2,10 @@ package application.Process.Cell;
 
 import application.Process.Location;
 import application.Process.Players.Player;
+import javafx.scene.canvas.GraphicsContext;
+import sharedObject.IRenderable;
 
-public class Cell {
+public class Cell implements IRenderable{
 	protected Player player;
 	protected Location location;
 	
@@ -42,6 +44,18 @@ public class Cell {
 	public int getLevel() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int getZ() {
+		// TODO Auto-generated method stub
+		return 1;
+	}
+
+	@Override
+	public void draw(GraphicsContext gc) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 

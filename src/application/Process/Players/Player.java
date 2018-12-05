@@ -4,8 +4,10 @@ package application.Process.Players;
 import java.util.ArrayList;
 
 import application.Process.Location;
+import javafx.scene.canvas.GraphicsContext;
+import sharedObject.IRenderable;
 
-public class Player implements Movable,Bulidable {
+public class Player implements Movable,Bulidable,IRenderable {
 	private String name;
 	private Location currentLocation;
 	
@@ -86,5 +88,18 @@ public class Player implements Movable,Bulidable {
 		
 		
 	}
+
+	@Override
+	public int getZ() {
+		// TODO Auto-generated method stub
+		return 3;
+	}
+
+	@Override
+	public void draw(GraphicsContext gc) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }
