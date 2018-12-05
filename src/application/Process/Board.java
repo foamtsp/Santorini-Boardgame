@@ -7,15 +7,23 @@ import application.Process.Cell.Tower;
 import application.Process.Exception.InvalidBuildException;
 import application.Process.Exception.InvalidMoveException;
 import application.Process.Players.Player;
+import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 public class Board implements BoardInterface{
 
+	
 	private Cell[][] grid = new Cell[SIDE][SIDE];
 	private Player p1, p2;
 	private boolean moved = false;
 	private boolean builded = true;
 	private boolean p1Turn = true;
 	
+	private GridPane cellGroup = new GridPane();
+    //private Group playerGroup = new Group();
+    
 	public Board(Player p1, Player p2) {
 		// TODO Auto-generated constructor stub
 		this.p1 = p1;
@@ -23,7 +31,9 @@ public class Board implements BoardInterface{
 		
 		for (int y = 0; y < 5; y++) {
 			for (int x = 0; x < 5; x++) {
-				grid[y][x] = new Cell(new Location(y, x));
+				Cell c = new Cell(new Location(y, x));
+				grid[y][x] = c;
+				cellGroup.add(c,x,y,1,1);
 			}
 		}
 		
@@ -34,8 +44,28 @@ public class Board implements BoardInterface{
 		
 		grid[y1][x1].setPlayer(p1);
 		grid[y2][x2].setPlayer(p2);
+		
+		//playerGroup.getChildren().addAll(p1,p2);
+		
 	}
 
+	public GridPane getCellGroup() {
+		return cellGroup;
+	}
+
+	public void setCellGroup(GridPane cellGroup) {
+		this.cellGroup = cellGroup;
+	}
+/*
+
+	public Group getPlayerGroup() {
+		return playerGroup;
+	}
+
+	public void setPlayerGroup(Group playerGroup) {
+		this.playerGroup = playerGroup;
+	}
+*/
 	@Override
 	public void move(Player p, Location newLocation) throws InvalidMoveException{
 		// TODO Auto-generated method stub

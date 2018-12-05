@@ -5,11 +5,14 @@ import application.Process.Players.Player;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class Main extends Application {
@@ -66,7 +69,7 @@ public class Main extends Application {
 			else board.build(player2, null);
 			s.changeTurn(board.isP1Turn());
 		});*/
-		f.getChildren().addAll(s,backBtn);
+		f.getChildren().addAll(s,backBtn,board.getCellGroup());
 		backBtn.setOnAction(e->{
 			primaryStage.setScene(scene1);
 			primaryStage.setTitle("Santorini");			
@@ -76,6 +79,7 @@ public class Main extends Application {
 		
 		scene2 = new Scene(f,1000,600);
 		scene3 = new Scene(des,1000,600);
+
 		primaryStage.setScene(scene1);
 		primaryStage.setTitle("Santorini");
 		primaryStage.show();
@@ -98,4 +102,6 @@ public class Main extends Application {
 		gc.setFont(f2);
 		gc.fillText("Description", 30, 150,800);
 	}*/
+	
+	
 }

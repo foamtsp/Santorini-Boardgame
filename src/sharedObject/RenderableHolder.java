@@ -17,8 +17,8 @@ public class RenderableHolder {
 
 	private List<IRenderable> entities;
 	private Comparator<IRenderable> comparator;
-	public static Image mapSprite;
-	public static Image mineSprite;
+	public static Image Tile;
+	public static Image Character;
 	public static AudioClip  explosionSound;
 
 	static {
@@ -39,8 +39,8 @@ public class RenderableHolder {
 	}
 
 	public static void loadResource() {
-		mapSprite = new Image(ClassLoader.getSystemResource("Map.png").toString());
-		mineSprite = new Image(ClassLoader.getSystemResource("Mine.png").toString());
+		Tile = new Image(ClassLoader.getSystemResource("BlockTiles.png").toString());
+		Character = new Image(ClassLoader.getSystemResource("p1Character.png").toString());
 		explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
 	}
 

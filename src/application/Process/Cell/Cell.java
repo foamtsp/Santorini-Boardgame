@@ -1,19 +1,30 @@
 package application.Process.Cell;
 
+import application.Process.Board;
 import application.Process.Location;
 import application.Process.Players.Player;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import sharedObject.IRenderable;
 
-public class Cell implements IRenderable{
+public class Cell extends Rectangle implements IRenderable{
+	
 	protected Player player;
 	protected Location location;
 	
 	public Cell(Location location) {
+		setWidth(Board.TILE_SIZE);
+        setHeight(Board.TILE_SIZE);
+        setFill(location.getX()%2 == 0 ? Color.valueOf("#feb") : Color.valueOf("#582"));//setFill(Color.valueOf("#582"));
 		this.location = location;
+		this.player = null;
 	}
 	
 	public Cell(Location location,Player player) {
+		setWidth(Board.TILE_SIZE);
+        setHeight(Board.TILE_SIZE);
+        setFill(Color.valueOf("#582"));
 		this.location = location;
 		this.player = player;
 	}
