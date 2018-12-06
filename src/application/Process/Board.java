@@ -21,7 +21,7 @@ public class Board implements BoardInterface{
 	private boolean builded = true;
 	private boolean p1Turn = true;
 	
-	private GridPane cellGroup = new GridPane();
+	//private GridPane cellGroup = new GridPane();
     //private Group playerGroup = new Group();
     
 	public Board(Player p1, Player p2) {
@@ -33,7 +33,7 @@ public class Board implements BoardInterface{
 			for (int x = 0; x < 5; x++) {
 				Cell c = new Cell(new Location(y, x));
 				grid[y][x] = c;
-				cellGroup.add(c,x,y,1,1);
+				//cellGroup.getChildren().add(c);
 			}
 		}
 		
@@ -43,12 +43,13 @@ public class Board implements BoardInterface{
 		int y2 = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
 		
 		grid[y1][x1].setPlayer(p1);
+		p1.setCurrentLocation(new Location(y1,x1));
 		grid[y2][x2].setPlayer(p2);
+		p2.setCurrentLocation(new Location(y2,x2));
 		
-		//playerGroup.getChildren().addAll(p1,p2);
 		
 	}
-
+/*
 	public GridPane getCellGroup() {
 		return cellGroup;
 	}
@@ -79,6 +80,7 @@ public class Board implements BoardInterface{
 			int targetY = newLocation.getY();
 
 			grid[targetY][targetX].setPlayer(p);
+			p1.setCurrentLocation(new Location(targetY,targetX));
 			grid[p.getCurrentLocation().getY()][p.getCurrentLocation().getX()].setPlayer(null);
 			this.moved = true;
 			this.builded = false;

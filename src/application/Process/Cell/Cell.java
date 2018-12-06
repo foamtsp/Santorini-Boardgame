@@ -16,7 +16,8 @@ public class Cell extends Rectangle implements IRenderable{
 	public Cell(Location location) {
 		setWidth(Board.TILE_SIZE);
         setHeight(Board.TILE_SIZE);
-        setFill(location.getX()%2 == 0 ? Color.valueOf("#feb") : Color.valueOf("#582"));//setFill(Color.valueOf("#582"));
+        setFill((location.getX()+location.getY())%2 == 0 ? Color.valueOf("#def") : Color.valueOf("#582"));//setFill(Color.valueOf("#582"));
+        relocate(location.getX() * Board.TILE_SIZE, location.getY() * Board.TILE_SIZE);
 		this.location = location;
 		this.player = null;
 	}

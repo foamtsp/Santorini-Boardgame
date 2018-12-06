@@ -1,25 +1,29 @@
 package application;
 	
 import application.Process.Board;
+import application.Process.Location;
+import application.Process.Cell.Cell;
 import application.Process.Players.Player;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
-import javafx.scene.Node;
-import javafx.scene.Parent;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 public class Main extends Application {
 	Scene scene1,scene2,scene3;
-	Player player1, player2;
+	Player player1 = new Player("") , player2 = new Player("");
 	StatusPage s;
 	Board board;
+	private Pane g;
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -55,21 +59,16 @@ public class Main extends Application {
 			
 		});
 		scene1 = new Scene(mp,1000,600);
-		VBox f = new VBox();
+		BorderPane f = new BorderPane();
 		Button backBtn = new Button("Back");
 		f.setPrefHeight(300);
 		f.setPrefWidth(150);
 		s = new StatusPage();
-		/*s.moveBtn.setOnAction(e->{
-			if(board.isP1Turn()) board.move(player1, null);//mouse click event
-			else board.move(player2, null);
-		});
-		s.buildBtn.setOnAction(e->{
-			if(board.isP1Turn()) board.build(player1, null);//mouse click event
-			else board.build(player2, null);
-			s.changeTurn(board.isP1Turn());
-		});*/
-		f.getChildren().addAll(s,backBtn,board.getCellGroup());
+		g = (Pane) createContent();
+		f.setLeft(s);
+		f.setMargin(s, new Insets(10, 10, 10, 10));
+		f.setCenter(g);
+		//f.getChildren().addAll(s,g);
 		backBtn.setOnAction(e->{
 			primaryStage.setScene(scene1);
 			primaryStage.setTitle("Santorini");			
@@ -79,7 +78,7 @@ public class Main extends Application {
 		
 		scene2 = new Scene(f,1000,600);
 		scene3 = new Scene(des,1000,600);
-
+		//Scene scene4 = new Scene(g,1000,600);
 		primaryStage.setScene(scene1);
 		primaryStage.setTitle("Santorini");
 		primaryStage.show();
@@ -103,5 +102,37 @@ public class Main extends Application {
 		gc.fillText("Description", 30, 150,800);
 	}*/
 	
+
+	    private Group tileGroup = new Group();
+	    private Group pieceGroup = new Group();
+	    
+	    private Cell[][] nboard = new Cell[Board.WIDTH][Board.HEIGHT];
+	    private Pane createContent() {
+	        Pane root = new Pane();
+	        root.setPrefSize(Board.WIDTH * Board.TILE_SIZE, Board.HEIGHT * Board.TILE_SIZE);
+	        root.getChildren().addAll(tileGroup, pieceGroup);
+
+	        for (int y = 0; y < 5; y++) {
+	            for (int x = 0; x < 5; x++) {
+	            	Cell c = new Cell(new Location(y, x));
+	                nboard[y][x] =  c;
+
+	                tileGroup.getChildren().add(c);
+	            }
+	        }
+	        /*
+	        int x1 = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
+			int y1 = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
+			int x2 = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
+			int y2 = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
+			
+			nboard[y1][x1].setPlayer(player1);
+			player1.setCurrentLocation(new Location(y1,x1));
+			nboard[y2][x2].setPlayer(player2);
+			player2.setCurrentLocation(new Location(y2,x2));
+			*/
+	        pieceGroup.getChildren().addAll(player1,player2);
+	        return root;
+	    }
 	
 }
