@@ -3,7 +3,9 @@ package application.Process.Cell;
 import application.Process.Board;
 import application.Process.Location;
 import application.Process.Players.Player;
+import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import sharedObject.IRenderable;
@@ -20,6 +22,21 @@ public class Cell extends Rectangle implements IRenderable{
         relocate(location.getX() * Board.TILE_SIZE, location.getY() * Board.TILE_SIZE);
 		this.location = location;
 		this.player = null;
+		
+		setOnMouseEntered(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				setStroke(Color.YELLOW);
+				setStrokeWidth(10);
+			}
+		});
+		setOnMouseExited(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				setStroke(new Color(0,0,0,0));
+			}
+		});
+		
 	}
 	
 	public Cell(Location location,Player player) {

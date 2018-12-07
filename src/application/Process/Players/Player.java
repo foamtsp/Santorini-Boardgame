@@ -12,8 +12,8 @@ import javafx.scene.shape.Ellipse;
 import sharedObject.IRenderable;
 
 public class Player extends StackPane implements Movable,Bulidable,IRenderable {
-	//private double mouseX, mouseY;
-    //private double oldX, oldY;
+	private double mouseX, mouseY;
+    private double oldX, oldY;
 	private String name;
 	private Location currentLocation;
 	
@@ -23,7 +23,9 @@ public class Player extends StackPane implements Movable,Bulidable,IRenderable {
 		int y = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
 		this.currentLocation = new Location(y,x);
 		
-		relocate(currentLocation.getX() * Board.TILE_SIZE, currentLocation.getY() * Board.TILE_SIZE);
+		//relocate(currentLocation.getX() * Board.TILE_SIZE, currentLocation.getY() * Board.TILE_SIZE);
+		
+		move(getCurrentLocation().getX(), getCurrentLocation().getX());
 		
 		Ellipse bg = new Ellipse(Board.TILE_SIZE * 0.3125, Board.TILE_SIZE * 0.26);
         bg.setFill(Color.BLACK);
@@ -44,17 +46,25 @@ public class Player extends StackPane implements Movable,Bulidable,IRenderable {
         ellipse.setTranslateY((Board.TILE_SIZE - Board.TILE_SIZE * 0.26 * 2) / 2);
 
         getChildren().addAll(bg, ellipse);
-        /*
+        
         setOnMousePressed(e -> {
             mouseX = e.getSceneX();
             mouseY = e.getSceneY();
+            //System.out.println(mouseX);
         });
 
         setOnMouseDragged(e -> {
             relocate(e.getSceneX() - mouseX + oldX, e.getSceneY() - mouseY + oldY);
+            System.out.println(- mouseX + oldX); 
         });
-        */
+  
 	}
+	
+	public void move(int x, int y) {
+        oldX = x * Board.TILE_SIZE;
+        oldY = y * Board.TILE_SIZE;
+        relocate(oldX, oldY);
+    }
 	
 	public String getName() {
 		return name;

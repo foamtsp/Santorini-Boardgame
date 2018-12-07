@@ -7,10 +7,7 @@ import application.Process.Cell.Tower;
 import application.Process.Exception.InvalidBuildException;
 import application.Process.Exception.InvalidMoveException;
 import application.Process.Players.Player;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+
 
 public class Board implements BoardInterface{
 
@@ -21,8 +18,6 @@ public class Board implements BoardInterface{
 	private boolean builded = true;
 	private boolean p1Turn = true;
 	
-	//private GridPane cellGroup = new GridPane();
-    //private Group playerGroup = new Group();
     
 	public Board(Player p1, Player p2) {
 		// TODO Auto-generated constructor stub
@@ -33,7 +28,6 @@ public class Board implements BoardInterface{
 			for (int x = 0; x < 5; x++) {
 				Cell c = new Cell(new Location(y, x));
 				grid[y][x] = c;
-				//cellGroup.getChildren().add(c);
 			}
 		}
 		
