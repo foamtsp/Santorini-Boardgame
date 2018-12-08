@@ -40,6 +40,7 @@ public class Main extends Application {
 		pbtn.setOnAction(e->{
 			String p1 = mp.t1.getText().trim();
 			String p2 = mp.t2.getText().trim();
+			/*
 			player1 = new Player(p1);
 			player2 = new Player(p2);
 			while ((player2.getCurrentLocation().getX() == player1.getCurrentLocation().getX())
@@ -49,6 +50,7 @@ public class Main extends Application {
 				player2.setCurrentLocation(new Location(ny, nx));
 			}
 			player2.move(player2.getCurrentLocation().getX(), player2.getCurrentLocation().getX());
+			*/
 			s.setPlayerName(mp.t1.getText().trim(), mp.t2.getText().trim());
 	
 			primaryStage.setScene(scene2);
@@ -72,7 +74,7 @@ public class Main extends Application {
 		f.setPrefHeight(300);
 		f.setPrefWidth(150);
 		s = new StatusPage();
-		board = new Board(player1,player2);
+		board = new Board();
 		f.setLeft(s);
 		f.setBottom(backBtn);
 		f.setMargin(s, new Insets(10, 10, 10, 10));

@@ -23,9 +23,7 @@ public class Player extends StackPane implements Movable,Bulidable,IRenderable {
 		int y = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
 		this.currentLocation = new Location(y,x);
 		
-		//relocate(currentLocation.getX() * Board.TILE_SIZE, currentLocation.getY() * Board.TILE_SIZE);
-		
-		move(getCurrentLocation().getX(), getCurrentLocation().getX());
+		move(getCurrentLocation().getX(), getCurrentLocation().getY());
 		
 		Ellipse bg = new Ellipse(Board.TILE_SIZE * 0.3125, Board.TILE_SIZE * 0.26);
         bg.setFill(Color.BLACK);
@@ -50,12 +48,16 @@ public class Player extends StackPane implements Movable,Bulidable,IRenderable {
         setOnMousePressed(e -> {
             mouseX = e.getSceneX();
             mouseY = e.getSceneY();
-            //System.out.println(mouseX);
+            System.out.println(getCurrentLocation().getX()+" "+getCurrentLocation().getY());
         });
         
         setOnMouseDragged(e -> {
             relocate(e.getSceneX() - mouseX + oldX, e.getSceneY() - mouseY + oldY);
             System.out.println(e.getSceneX()- mouseX + oldX); 
+        });
+        
+        setOnMouseClicked(e -> {
+            System.out.println(getName()); 
         });
 	}
 	

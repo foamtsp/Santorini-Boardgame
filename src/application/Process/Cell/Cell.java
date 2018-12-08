@@ -17,6 +17,7 @@ public class Cell extends Rectangle implements IRenderable{
 	
 	protected Player player;
 	protected Location location;
+	protected boolean destroyed;
 	
 	public Cell(Location location) {
 		setWidth(Board.TILE_SIZE);
@@ -40,12 +41,6 @@ public class Cell extends Rectangle implements IRenderable{
 			}
 		});
 		
-		setOnMouseClicked(new EventHandler<MouseEvent>() {
-			@Override
-			public void handle(MouseEvent event) {
-				System.out.println("TT");;
-			}
-		});
 		/*
 		String image_path = ClassLoader.getSystemResource("GrassTiles.png").toString();
 		Image n = new Image(image_path);

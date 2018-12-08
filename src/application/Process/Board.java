@@ -22,7 +22,7 @@ public class Board extends Pane implements BoardInterface {
 	private boolean builded = true;
 	private boolean p1Turn = true;
 
-	public Board(Player p1, Player p2) {
+	public Board() {
 		// TODO Auto-generated constructor stub
 		super();
 
@@ -37,20 +37,21 @@ public class Board extends Pane implements BoardInterface {
 			}
 		}
 
-		p1 = new Player("");
-		p2 = new Player("");
-		while ((p2.getCurrentLocation().getX() == p1.getCurrentLocation().getX())
-				&& (p2.getCurrentLocation().getY() == p1.getCurrentLocation().getY())) {
+		this.p1 = new Player("p1");
+		this.p2 = new Player("p2");
+		while ((this.p2.getCurrentLocation().getX() == this.p1.getCurrentLocation().getX())
+				&& (this.p2.getCurrentLocation().getY() == this.p1.getCurrentLocation().getY())) {
 			int nx = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
 			int ny = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
-			p2.setCurrentLocation(new Location(ny, nx));
+			this.p2.setCurrentLocation(new Location(ny, nx));
 		}
-		p2.move(p2.getCurrentLocation().getX(), p2.getCurrentLocation().getX());
+		this.p2.move(this.p2.getCurrentLocation().getX(), this.p2.getCurrentLocation().getY());
 		
-		grid[p1.getCurrentLocation().getY()][p1.getCurrentLocation().getX()].setPlayer(p1);
-		grid[p2.getCurrentLocation().getY()][p2.getCurrentLocation().getX()].setPlayer(p2);
+		grid[this.p1.getCurrentLocation().getY()][this.p1.getCurrentLocation().getX()].setPlayer(this.p1);
+		grid[this.p2.getCurrentLocation().getY()][this.p2.getCurrentLocation().getX()].setPlayer(this.p2);
 		
-		pieceGroup.getChildren().addAll(p1, p2);
+		pieceGroup.getChildren().addAll(this.p1, this.p2);
+		
 	
 	}
 
@@ -68,6 +69,7 @@ public class Board extends Pane implements BoardInterface {
 			grid[targetY][targetX].setPlayer(p);
 			p1.setCurrentLocation(new Location(targetY, targetX));
 			grid[p.getCurrentLocation().getY()][p.getCurrentLocation().getX()].setPlayer(null);
+			//p.move(targetX, targetY);
 			this.moved = true;
 			this.builded = false;
 		}
@@ -153,7 +155,7 @@ public class Board extends Pane implements BoardInterface {
 		}
 
 		while (!pMoves.isEmpty()) {
-			hasMoves = hasMoves | canMove(p, pMoves.remove(0));
+			hasMoves = hasMoves || canMove(p, pMoves.remove(0));
 		}
 
 		return !hasMoves;
@@ -184,7 +186,7 @@ public class Board extends Pane implements BoardInterface {
 		Cell targetCell = grid[location.getY()][location.getX()];
 		int targetLevel = targetCell.getLevel();
 
-		if (!(p.tryMove(location)) || ((Tower) targetCell).isDestroyed()
+		if (!(p.tryMove(location)) || targetLevel >=4
 				|| ((targetLevel > currentLevel) && (targetLevel - currentLevel > 1))
 				|| targetCell.getPlayer() != null) {
 			return false;
@@ -264,6 +266,10 @@ public class Board extends Pane implements BoardInterface {
 
 	public void setP1Turn(boolean p1Turn) {
 		this.p1Turn = p1Turn;
+	}
+	
+	public void update() {
+		
 	}
 
 }
