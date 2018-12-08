@@ -93,28 +93,6 @@ public class Board extends Pane implements BoardInterface {
 		return buildLocation;
 	}
 
-	public void jump(Player p, Location newLocation) throws InvalidMoveException {
-		int currentX = p.getCurrentLocation().getX();
-		int currentY = p.getCurrentLocation().getY();
-
-		int targetX = newLocation.getX();
-		int targetY = newLocation.getY();
-
-		Cell currentCell = grid[currentY][currentX];
-		Tower targetCell = (Tower) grid[targetY][targetX];
-
-		if (targetCell.getLevel() >= 4) {
-			throw new InvalidMoveException();
-		}
-
-		int diffLevel = targetCell.getLevel() - currentCell.getLevel();
-
-		if (targetCell instanceof Tower && diffLevel <= 1) {
-			move(p, newLocation);
-		} else
-			throw new InvalidMoveException();
-	}
-
 	@Override
 	public void build(Player p, Location location) throws InvalidBuildException {
 		// TODO Auto-generated method stub
@@ -205,7 +183,7 @@ public class Board extends Pane implements BoardInterface {
 		Cell targetCell = grid[location.getY()][location.getX()];
 		int targetLevel = targetCell.getLevel();
 
-		if (!(p.tryMove(location)) || targetLevel >=4
+		if (!(p.tryMove(location)) || (targetCell.isDestroyed())
 				|| ((targetLevel > currentLevel) && (targetLevel - currentLevel > 1))
 				|| targetCell.getPlayer() != null) {
 			return false;
