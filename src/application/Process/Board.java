@@ -22,6 +22,7 @@ public class Board extends Pane implements BoardInterface {
 	private boolean builded = true;
 	private boolean p1Turn = true;
 	private Location nextMove;
+	private Location buildLocation;
 
 	public Location getNextMove() {
 		return nextMove;
@@ -38,8 +39,10 @@ public class Board extends Pane implements BoardInterface {
 			for (int x = 0; x < 5; x++) {
 				Cell c = new Cell(new Location(y, x));
 				c.setOnMouseClicked(e->{
-					nextMove = c.getLocation();
-					System.out.println("move to "+nextMove.getX()+" "+nextMove.getY());
+					if(moved==false) {nextMove = c.getLocation();
+					System.out.println("move to "+nextMove.getX()+" "+nextMove.getY());}
+					else{buildLocation = c.getLocation();
+					System.out.println("build at "+buildLocation.getX()+" "+buildLocation.getY());}
 				});
 
 				grid[y][x] = c;
@@ -76,14 +79,18 @@ public class Board extends Pane implements BoardInterface {
 			int targetX = newLocation.getX();
 			int targetY = newLocation.getY();
 			grid[targetY][targetX].setPlayer(p);
-			p1.setCurrentLocation(new Location(targetY, targetX));
+			p.setCurrentLocation(new Location(targetY, targetX));
 			grid[p.getCurrentLocation().getY()][p.getCurrentLocation().getX()].setPlayer(null);
 			//p.move(targetX, targetY);
-			System.out.println(p.getName()+" is at "+p1.getCurrentLocation().getX()+","+p1.getCurrentLocation().getY());
-			//this.moved = true;
-			//this.builded = false;
+			System.out.println(p.getName()+" is at "+p.getCurrentLocation().getX()+","+p.getCurrentLocation().getY());
+			this.moved = true;
+			this.builded = false;
 			this.p1Turn = !this.p1Turn;
 		}
+	}
+
+	public Location getBuildLocation() {
+		return buildLocation;
 	}
 
 	public void jump(Player p, Location newLocation) throws InvalidMoveException {
@@ -127,6 +134,7 @@ public class Board extends Pane implements BoardInterface {
 				Tower currentT = (Tower) current;
 				currentT.addLevel();
 			}
+			System.out.println(p.getCurrentLocation().getX()+","+p.getCurrentLocation().getY()+" has tower level"+((Tower)current).getLevel());
 			this.moved = true;
 			this.builded = true;
 			this.p1Turn = !this.p1Turn;

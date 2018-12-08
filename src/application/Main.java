@@ -3,6 +3,7 @@ package application;
 import application.Process.Board;
 import application.Process.Location;
 import application.Process.Cell.Cell;
+import application.Process.Exception.InvalidBuildException;
 import application.Process.Exception.InvalidMoveException;
 import application.Process.Players.Player;
 import javafx.application.Application;
@@ -41,6 +42,8 @@ public class Main extends Application {
 		pbtn.setOnAction(e->{
 			String p1 = mp.t1.getText().trim();
 			String p2 = mp.t2.getText().trim();
+			board.getP1().setName(p1);
+			board.getP2().setName(p2);
 			/*
 			player1 = new Player(p1);
 			player2 = new Player(p2);
@@ -87,6 +90,23 @@ public class Main extends Application {
 				try {
 					board.move(board.getP2(), board.getNextMove());
 				} catch (InvalidMoveException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
+		});
+		s.buildBtn.setOnAction(e->{
+			if(board.isP1Turn())
+				try {
+					board.build(board.getP1(), board.getBuildLocation());
+				} catch (InvalidBuildException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			else  
+				try {
+					board.build(board.getP2(), board.getBuildLocation());
+				} catch (InvalidBuildException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
