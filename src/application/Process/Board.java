@@ -127,14 +127,14 @@ public class Board extends Pane implements BoardInterface {
 			int targetY = location.getY();
 
 			Cell current = grid[targetY][targetX];
-			if (!(current instanceof Tower) && current.getLevel() == 0) {
+			if (!(current instanceof Tower) /*&& current.getLevel() == 0*/) {
 				Tower currentT = new Tower(location);
-				current = currentT;
+				grid[targetY][targetX] = currentT;
 			} else {
-				Tower currentT = (Tower) current;
-				currentT.addLevel();
+				 //Tower currentT =  ((Tower) current);
+				 ((Tower) grid[targetY][targetX]).addLevel();
 			}
-			System.out.println(p.getCurrentLocation().getX()+","+p.getCurrentLocation().getY()+" has tower level"+((Tower)current).getLevel());
+			System.out.println(getBuildLocation().getX()+","+getBuildLocation().getY()+" has tower level"+((Tower)grid[targetY][targetX]).getLevel());
 			this.moved = false;
 			this.builded = true;
 			this.p1Turn = !this.p1Turn;
