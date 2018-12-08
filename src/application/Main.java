@@ -78,12 +78,19 @@ public class Main extends Application {
 		s.moveBtn.setOnAction(e->{
 			if(board.isP1Turn())
 				try {
-					System.out.println("tt");
 					board.move(board.getP1(), board.getNextMove());
 				} catch (InvalidMoveException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			else  
+				try {
+					board.move(board.getP2(), board.getNextMove());
+				} catch (InvalidMoveException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			
 		});
 		board = new Board();
 		f.setLeft(s);

@@ -49,7 +49,6 @@ public class Board extends Pane implements BoardInterface {
 
 		this.p1 = new Player("p1");
 		this.p2 = new Player("p2");
-		System.out.println("p1: "+p1.getCurrentLocation().getX()+","+p1.getCurrentLocation().getY());
 		while ((this.p2.getCurrentLocation().getX() == this.p1.getCurrentLocation().getX())
 				&& (this.p2.getCurrentLocation().getY() == this.p1.getCurrentLocation().getY())) {
 			int nx = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
@@ -62,29 +61,28 @@ public class Board extends Pane implements BoardInterface {
 		grid[this.p2.getCurrentLocation().getY()][this.p2.getCurrentLocation().getX()].setPlayer(this.p2);
 		
 		pieceGroup.getChildren().addAll(this.p1, this.p2);
-		
+		System.out.println("p1: "+p1.getCurrentLocation().getX()+","+p1.getCurrentLocation().getY());
+		System.out.println("p2: "+p2.getCurrentLocation().getX()+","+p2.getCurrentLocation().getY());
 	
 	}
 
 	@Override
 	public void move(Player p, Location newLocation) throws InvalidMoveException {
 		// TODO Auto-generated method stub
-		if (!(p.tryMove(newLocation)) || /*isGameOver()*/hasNoMoves(p) || (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
+		if (!(p.tryMove(newLocation)) || isGameOver()|| (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
 				|| !(canMove(p, newLocation)) || isMoved() || !isBuilded()) {
 			throw new InvalidMoveException();
 		} else {
 			int targetX = newLocation.getX();
 			int targetY = newLocation.getY();
-			System.out.println(1);
 			grid[targetY][targetX].setPlayer(p);
-			System.out.println(2);
 			p1.setCurrentLocation(new Location(targetY, targetX));
-			System.out.println(3);
 			grid[p.getCurrentLocation().getY()][p.getCurrentLocation().getX()].setPlayer(null);
 			//p.move(targetX, targetY);
-			System.out.println("p1 is at "+p1.getCurrentLocation().getX()+","+p1.getCurrentLocation().getY());
-			this.moved = true;
-			this.builded = false;
+			System.out.println(p.getName()+" is at "+p1.getCurrentLocation().getX()+","+p1.getCurrentLocation().getY());
+			//this.moved = true;
+			//this.builded = false;
+			this.p1Turn = !this.p1Turn;
 		}
 	}
 
