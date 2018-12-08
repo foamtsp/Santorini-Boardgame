@@ -21,6 +21,11 @@ public class Board extends Pane implements BoardInterface {
 	private boolean moved = false;
 	private boolean builded = true;
 	private boolean p1Turn = true;
+	private Location nextMove;
+
+	public Location getNextMove() {
+		return nextMove;
+	}
 
 	public Board() {
 		// TODO Auto-generated constructor stub
@@ -32,6 +37,11 @@ public class Board extends Pane implements BoardInterface {
 		for (int y = 0; y < 5; y++) {
 			for (int x = 0; x < 5; x++) {
 				Cell c = new Cell(new Location(y, x));
+				c.setOnMouseClicked(e->{
+					nextMove = c.getLocation();
+					System.out.println("move to "+nextMove.getX()+" "+nextMove.getY());
+				});
+
 				grid[y][x] = c;
 				tileGroup.getChildren().add(c);
 			}
@@ -39,6 +49,7 @@ public class Board extends Pane implements BoardInterface {
 
 		this.p1 = new Player("p1");
 		this.p2 = new Player("p2");
+		System.out.println("p1: "+p1.getCurrentLocation().getX()+","+p1.getCurrentLocation().getY());
 		while ((this.p2.getCurrentLocation().getX() == this.p1.getCurrentLocation().getX())
 				&& (this.p2.getCurrentLocation().getY() == this.p1.getCurrentLocation().getY())) {
 			int nx = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
@@ -65,11 +76,14 @@ public class Board extends Pane implements BoardInterface {
 
 			int targetX = newLocation.getX();
 			int targetY = newLocation.getY();
-
+			System.out.println(1);
 			grid[targetY][targetX].setPlayer(p);
+			System.out.println(2);
 			p1.setCurrentLocation(new Location(targetY, targetX));
+			System.out.println(3);
 			grid[p.getCurrentLocation().getY()][p.getCurrentLocation().getX()].setPlayer(null);
 			//p.move(targetX, targetY);
+			System.out.println("p1 is at "+p1.getCurrentLocation().getX()+","+p1.getCurrentLocation().getY());
 			this.moved = true;
 			this.builded = false;
 		}

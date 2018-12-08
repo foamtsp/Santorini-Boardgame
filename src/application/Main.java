@@ -3,6 +3,7 @@ package application;
 import application.Process.Board;
 import application.Process.Location;
 import application.Process.Cell.Cell;
+import application.Process.Exception.InvalidMoveException;
 import application.Process.Players.Player;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -74,6 +75,16 @@ public class Main extends Application {
 		f.setPrefHeight(300);
 		f.setPrefWidth(150);
 		s = new StatusPage();
+		s.moveBtn.setOnAction(e->{
+			if(board.isP1Turn())
+				try {
+					System.out.println("tt");
+					board.move(board.getP1(), board.getNextMove());
+				} catch (InvalidMoveException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+		});
 		board = new Board();
 		f.setLeft(s);
 		f.setBottom(backBtn);
