@@ -5,7 +5,6 @@ import application.Process.Location;
 public class Tower extends Cell{
 	
 	protected int level;
-	protected boolean destroyed;
 
 	public Tower(Location location) {
 		super(location);

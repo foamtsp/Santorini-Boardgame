@@ -96,6 +96,11 @@ public class Cell extends Rectangle implements IRenderable{
 		// TODO Auto-generated method stub
 		
 	}
+
+	public boolean isDestroyed() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 
 }

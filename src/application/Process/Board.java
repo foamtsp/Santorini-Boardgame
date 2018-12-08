@@ -85,7 +85,7 @@ public class Board extends Pane implements BoardInterface {
 			System.out.println(p.getName()+" is at "+p.getCurrentLocation().getX()+","+p.getCurrentLocation().getY());
 			this.moved = true;
 			this.builded = false;
-			this.p1Turn = !this.p1Turn;
+			//this.p1Turn = !this.p1Turn;
 		}
 	}
 
@@ -119,7 +119,7 @@ public class Board extends Pane implements BoardInterface {
 	public void build(Player p, Location location) throws InvalidBuildException {
 		// TODO Auto-generated method stub
 		if (!(p.tryBuild(location)) || isGameOver() || (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
-				|| !(canBuild(p, location)) || !isBuilded()) {
+				|| !(canBuild(p, location)) || isBuilded()) {
 			throw new InvalidBuildException();
 		} else {
 
@@ -135,7 +135,7 @@ public class Board extends Pane implements BoardInterface {
 				currentT.addLevel();
 			}
 			System.out.println(p.getCurrentLocation().getX()+","+p.getCurrentLocation().getY()+" has tower level"+((Tower)current).getLevel());
-			this.moved = true;
+			this.moved = false;
 			this.builded = true;
 			this.p1Turn = !this.p1Turn;
 		}
@@ -223,7 +223,7 @@ public class Board extends Pane implements BoardInterface {
 
 		Cell targetCell = grid[location.getY()][location.getX()];
 
-		if (!(p.tryBuild(location)) || ((Tower) targetCell).isDestroyed() || targetCell.getPlayer() != null) {
+		if (!(p.tryBuild(location)) ||  targetCell.isDestroyed() || targetCell.getPlayer() != null) {
 			return false;
 		}
 		return true;
