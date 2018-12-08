@@ -52,12 +52,11 @@ public class Player extends StackPane implements Movable,Bulidable,IRenderable {
             mouseY = e.getSceneY();
             //System.out.println(mouseX);
         });
-
+        
         setOnMouseDragged(e -> {
             relocate(e.getSceneX() - mouseX + oldX, e.getSceneY() - mouseY + oldY);
-            System.out.println(- mouseX + oldX); 
+            System.out.println(e.getSceneX()- mouseX + oldX); 
         });
-  
 	}
 	
 	public void move(int x, int y) {

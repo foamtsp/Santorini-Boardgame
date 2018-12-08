@@ -20,10 +20,11 @@ import javafx.scene.layout.VBox;
 
 public class Main extends Application {
 	Scene scene1,scene2,scene3;
-	Player player1 = new Player("") , player2 = new Player("");
+	Player player1;
+	Player player2;
 	StatusPage s;
 	Board board;
-	private Pane g;
+	
 	@Override
 	public void start(Stage primaryStage) {
 		
@@ -41,8 +42,15 @@ public class Main extends Application {
 			String p2 = mp.t2.getText().trim();
 			player1 = new Player(p1);
 			player2 = new Player(p2);
-			board = new Board(player1,player2);
+			while ((player2.getCurrentLocation().getX() == player1.getCurrentLocation().getX())
+					&& (player2.getCurrentLocation().getY() == player1.getCurrentLocation().getY())) {
+				int nx = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
+				int ny = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
+				player2.setCurrentLocation(new Location(ny, nx));
+			}
+			player2.move(player2.getCurrentLocation().getX(), player2.getCurrentLocation().getX());
 			s.setPlayerName(mp.t1.getText().trim(), mp.t2.getText().trim());
+	
 			primaryStage.setScene(scene2);
 			primaryStage.setTitle("Santorini");
 			primaryStage.show();
@@ -64,10 +72,11 @@ public class Main extends Application {
 		f.setPrefHeight(300);
 		f.setPrefWidth(150);
 		s = new StatusPage();
-		g = (Pane) createContent();
+		board = new Board(player1,player2);
 		f.setLeft(s);
+		f.setBottom(backBtn);
 		f.setMargin(s, new Insets(10, 10, 10, 10));
-		f.setCenter(g);
+		f.setCenter(board);
 		//f.getChildren().addAll(s,g);
 		backBtn.setOnAction(e->{
 			primaryStage.setScene(scene1);
@@ -103,36 +112,4 @@ public class Main extends Application {
 	}*/
 	
 
-	    private Group tileGroup = new Group();
-	    private Group pieceGroup = new Group();
-	    
-	    private Cell[][] nboard = new Cell[Board.WIDTH][Board.HEIGHT];
-	    private Pane createContent() {
-	        Pane root = new Pane();
-	        root.setPrefSize(Board.WIDTH * Board.TILE_SIZE, Board.HEIGHT * Board.TILE_SIZE);
-	        root.getChildren().addAll(tileGroup, pieceGroup);
-
-	        for (int y = 0; y < 5; y++) {
-	            for (int x = 0; x < 5; x++) {
-	            	Cell c = new Cell(new Location(y, x));
-	                nboard[y][x] =  c;
-
-	                tileGroup.getChildren().add(c);
-	            }
-	        }
-	        /*
-	        int x1 = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
-			int y1 = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
-			int x2 = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
-			int y2 = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
-			
-			nboard[y1][x1].setPlayer(player1);
-			player1.setCurrentLocation(new Location(y1,x1));
-			nboard[y2][x2].setPlayer(player2);
-			player2.setCurrentLocation(new Location(y2,x2));
-			*/
-	        pieceGroup.getChildren().addAll(player1,player2);
-	        return root;
-	    }
-	
 }

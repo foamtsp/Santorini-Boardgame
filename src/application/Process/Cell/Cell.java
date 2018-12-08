@@ -5,8 +5,11 @@ import application.Process.Location;
 import application.Process.Players.Player;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import sharedObject.IRenderable;
 
@@ -36,6 +39,18 @@ public class Cell extends Rectangle implements IRenderable{
 				setStroke(new Color(0,0,0,0));
 			}
 		});
+		
+		setOnMouseClicked(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				System.out.println("TT");;
+			}
+		});
+		/*
+		String image_path = ClassLoader.getSystemResource("GrassTiles.png").toString();
+		Image n = new Image(image_path);
+		setFill(new ImagePattern(n));
+		*/
 		
 	}
 	
