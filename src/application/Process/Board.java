@@ -69,11 +69,10 @@ public class Board extends Pane implements BoardInterface {
 	@Override
 	public void move(Player p, Location newLocation) throws InvalidMoveException {
 		// TODO Auto-generated method stub
-		if (!(p.tryMove(newLocation)) || isGameOver() || (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
+		if (!(p.tryMove(newLocation)) || /*isGameOver()*/hasNoMoves(p) || (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
 				|| !(canMove(p, newLocation)) || isMoved() || !isBuilded()) {
 			throw new InvalidMoveException();
 		} else {
-
 			int targetX = newLocation.getX();
 			int targetY = newLocation.getY();
 			System.out.println(1);
@@ -169,7 +168,7 @@ public class Board extends Pane implements BoardInterface {
 		}
 
 		while (!pMoves.isEmpty()) {
-			hasMoves = hasMoves || canMove(p, pMoves.remove(0));
+			hasMoves = hasMoves | canMove(p, pMoves.remove(0));
 		}
 
 		return !hasMoves;
