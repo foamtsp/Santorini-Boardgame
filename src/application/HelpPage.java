@@ -1,10 +1,13 @@
 package application;
 
+import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
 public class HelpPage extends BorderPane {
+		
+	Button backBtn;
 	
 		public HelpPage() {
 			super();
@@ -14,7 +17,8 @@ public class HelpPage extends BorderPane {
 			setCenter(img);
 			
 			
-			
+			backBtn = new Button("Back");
+			setLeft(backBtn);
 	}
 	
 	

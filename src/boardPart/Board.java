@@ -74,6 +74,7 @@ public class Board extends Pane implements BoardInterface {
 		// TODO Auto-generated method stub
 		if (!(p.tryMove(newLocation)) || isGameOver()|| (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
 				|| !(canMove(p, newLocation)) || isMoved() || !isBuilded()) {
+			throw new InvalidMoveException();
 		} else {
 			int targetX = newLocation.getX();
 			int targetY = newLocation.getY();

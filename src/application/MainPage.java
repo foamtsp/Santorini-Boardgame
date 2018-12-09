@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.BackgroundPosition;
@@ -19,8 +20,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class MainPage extends GridPane{
-	private Text title;
-	private Label p1, p2;
+	private ImageView title;
 	private TextField t1,t2;
 	private BackgroundImage myBI;
 	private Image img;
@@ -31,18 +31,17 @@ public class MainPage extends GridPane{
 		this.setHgap(10);
 		this.setVgap(10);
 		this.setPadding(new Insets(25,25,25,25));
-		title = new Text("SANTORINI");
-		title.setFont(Font.font("Serif",FontWeight.BLACK,40));
-		p1 = new Label("Player1:");
-		p2 = new Label("Player2:");
+		String image_path = ClassLoader.getSystemResource("santorini_Logo.png").toString();
+		Image n = new Image(image_path);
+		title = new ImageView(n);
 		t1 = new TextField();
+		t1.setPromptText("Player1");
 		t2 = new TextField();
+		t2.setPromptText("Player2");
 		img = new Image("bcmp.jpg");
 		this.setBackground(new Background(new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-                BackgroundSize.DEFAULT)));
-		this.add(title,0,0,1,1);
-		this.add(p1, 0, 1);
-		this.add(p2, 0, 2);
+				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false))));
+		this.add(title,1,0,1,1);
 		this.add(t1, 1, 1);
 		this.add(t2, 1, 2);
 		HBox hb = new HBox(10);

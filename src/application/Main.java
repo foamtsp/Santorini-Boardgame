@@ -8,7 +8,9 @@ import javafx.geometry.Insets;
 import javafx.stage.Stage;
 import playersPart.Player;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.AudioClip;
 
@@ -51,7 +53,13 @@ public class Main extends Application {
 			primaryStage.show();
 			
 		});
-		BorderPane des = new HelpPage();
+		HelpPage des = new HelpPage();
+		des.backBtn.setOnAction(e->{
+			primaryStage.setScene(scene1);
+			primaryStage.setTitle("Santorini");			
+			primaryStage.show();
+			
+		});
 		mp.getHelpBtn().setOnAction(e->{
 			/*Canvas canvas = new Canvas(1000,600);
 			GraphicsContext gc = canvas.getGraphicsContext2D(); 	
@@ -74,14 +82,23 @@ public class Main extends Application {
 					board.move(board.getP1(), board.getNextMove());
 				} catch (InvalidMoveException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setContentText("Can't move to this cell! Please select new cell");
+					alert.setHeaderText("Error!");
+					alert.setTitle("Error");
+					alert.show();
+
+			}
 			else  
 				try {
 					board.move(board.getP2(), board.getNextMove());
 				} catch (InvalidMoveException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					e1.printStackTrace();Alert alert = new Alert(AlertType.ERROR);
+					alert.setContentText("Can't move to this cell! Please select new cell");
+					alert.setHeaderText("Error!");
+					alert.setTitle("Error");
+					alert.show();
 				}
 			board.update();
 		});
@@ -91,14 +108,22 @@ public class Main extends Application {
 					board.build(board.getP1(), board.getBuildLocation());
 				} catch (InvalidBuildException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setContentText("Can't build on this cell! Please select new cell");
+					alert.setHeaderText("Error!");
+					alert.setTitle("Error");
+					alert.show();
 				}
 			else  
 				try {
 					board.build(board.getP2(), board.getBuildLocation());
 				} catch (InvalidBuildException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setContentText("Can't build on this cell! Please select new cell");
+					alert.setHeaderText("Error!");
+					alert.setTitle("Error");
+					alert.show();
 				}
 			board.update();
 			
