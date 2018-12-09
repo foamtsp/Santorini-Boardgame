@@ -50,8 +50,8 @@ public class Board extends Pane implements BoardInterface {
 			}
 		}
 
-		this.p1 = new Player("p1");
-		this.p2 = new Player("p2");
+		this.p1 = new Player("p1","1");
+		this.p2 = new Player("p2","2");
 		while ((this.p2.getCurrentLocation().getX() == this.p1.getCurrentLocation().getX())
 				&& (this.p2.getCurrentLocation().getY() == this.p1.getCurrentLocation().getY())) {
 			int nx = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
@@ -74,13 +74,12 @@ public class Board extends Pane implements BoardInterface {
 		// TODO Auto-generated method stub
 		if (!(p.tryMove(newLocation)) || isGameOver()|| (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
 				|| !(canMove(p, newLocation)) || isMoved() || !isBuilded()) {
-			throw new InvalidMoveException();
 		} else {
 			int targetX = newLocation.getX();
 			int targetY = newLocation.getY();
 			grid[targetY][targetX].setPlayer(p);
-			p.setCurrentLocation(new Location(targetY, targetX));
 			grid[p.getCurrentLocation().getY()][p.getCurrentLocation().getX()].setPlayer(null);
+			p.setCurrentLocation(new Location(targetY, targetX));
 			//p.move(targetX, targetY);
 			System.out.println(p.getName()+" is at "+p.getCurrentLocation().getX()+","+p.getCurrentLocation().getY());
 			this.moved = true;
@@ -266,6 +265,13 @@ public class Board extends Pane implements BoardInterface {
 	}
 	
 	public void update() {
+		getP1().update();
+		getP2().update();
+		for (int y = 0; y < 5; y++) {
+			for (int x = 0; x < 5; x++) {
+				grid[y][x].update();
+			}
+		}
 		
 	}
 

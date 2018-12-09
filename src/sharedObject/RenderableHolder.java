@@ -19,7 +19,7 @@ public class RenderableHolder {
 	private Comparator<IRenderable> comparator;
 	public static Image Tile;
 	public static Image Character;
-	public static AudioClip  explosionSound;
+	public static AudioClip  bgmSound;
 
 	static {
 		loadResource();
@@ -39,9 +39,9 @@ public class RenderableHolder {
 	}
 
 	public static void loadResource() {
-		Tile = new Image(ClassLoader.getSystemResource("BlockTiles.png").toString());
-		Character = new Image(ClassLoader.getSystemResource("p1Character.png").toString());
-		explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
+		Tile = new Image(ClassLoader.getSystemResource("GrassTiles"+0+".png").toString());
+		Character = new Image(ClassLoader.getSystemResource("Player1_i.png").toString());
+		//explosionSound = new AudioClip(ClassLoader.getSystemResource("Explosion.wav").toString());
 	}
 
 	public void add(IRenderable entity) {
@@ -59,4 +59,13 @@ public class RenderableHolder {
 	public List<IRenderable> getEntities() {
 		return entities;
 	}
+
+	public void update() {
+		// TODO Auto-generated method stub
+		for (int i = entities.size() - 1; i >= 0; i--) {
+			if (entities.get(i).isDestroyed())
+				entities.remove(i);
+		}
+	}
+		
 }

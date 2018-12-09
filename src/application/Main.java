@@ -5,11 +5,13 @@ import boardPart.Location;
 import cellPart.Cell;
 import exceptionPart.InvalidBuildException;
 import exceptionPart.InvalidMoveException;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import playersPart.Player;
+import sharedObject.RenderableHolder;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -19,6 +21,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.AudioClip;
 
 public class Main extends Application {
 	Scene scene1,scene2,scene3;
@@ -26,10 +29,13 @@ public class Main extends Application {
 	Player player2;
 	StatusPage s;
 	Board board;
-	
+	public static AudioClip bgmSound;
 	@Override
 	public void start(Stage primaryStage) {
 		
+		bgmSound = new AudioClip(ClassLoader.getSystemResource("bgm.mp3").toString());
+		bgmSound.setVolume(1.0);
+		bgmSound.play();
 		MainPage mp = new MainPage();
 		primaryStage.setResizable(false);
 
@@ -73,6 +79,7 @@ public class Main extends Application {
 		f.setPrefWidth(150);
 		s = new StatusPage();
 		s.moveBtn.setOnAction(e->{
+			while(!board.isGameOver()) {
 			if(board.isP1Turn())
 				try {
 					board.move(board.getP1(), board.getNextMove());
@@ -87,9 +94,11 @@ public class Main extends Application {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-			
+			board.update();
+			}
 		});
 		s.buildBtn.setOnAction(e->{
+			while(board.isGameOver()){
 			if(board.isP1Turn())
 				try {
 					board.build(board.getP1(), board.getBuildLocation());
@@ -104,6 +113,8 @@ public class Main extends Application {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+			board.update();
+			}
 			
 		});
 		board = new Board();
@@ -121,7 +132,7 @@ public class Main extends Application {
 		
 		scene2 = new Scene(f,1000,600);
 		scene3 = new Scene(des,1000,600);
-		//Scene scene4 = new Scene(g,1000,600);
+		
 		primaryStage.setScene(scene1);
 		primaryStage.setTitle("Santorini");
 		primaryStage.show();

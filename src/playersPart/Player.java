@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import boardPart.Board;
 import boardPart.Location;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Ellipse;
 import sharedObject.IRenderable;
 
@@ -16,15 +18,23 @@ public class Player extends StackPane implements Movable,Bulidable,IRenderable {
     private double oldX, oldY;
 	private String name;
 	private Location currentLocation;
+	private String image_path;
+	private String type;
 	
-	public Player(String name) {
+	public boolean isDestroyed() {
+		return false;
+	}
+
+	public Player(String name,String type) {
 		this.name = name;
 		int x = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
 		int y = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
 		this.currentLocation = new Location(y,x);
+		this.type = type;
 		
 		move(getCurrentLocation().getX(), getCurrentLocation().getY());
 		
+		/*
 		Ellipse bg = new Ellipse(Board.TILE_SIZE * 0.3125, Board.TILE_SIZE * 0.26);
         bg.setFill(Color.BLACK);
 
@@ -33,27 +43,24 @@ public class Player extends StackPane implements Movable,Bulidable,IRenderable {
 
         bg.setTranslateX((Board.TILE_SIZE - Board.TILE_SIZE * 0.3125 * 2) / 2);
         bg.setTranslateY((Board.TILE_SIZE - Board.TILE_SIZE * 0.26 * 2) / 2 + Board.TILE_SIZE * 0.07);
-
+		*/
         Ellipse ellipse = new Ellipse(Board.TILE_SIZE * 0.3125, Board.TILE_SIZE * 0.26);
-        ellipse.setFill(Color.valueOf("#c40003"));
-
-        ellipse.setStroke(Color.BLACK);
-        ellipse.setStrokeWidth(Board.TILE_SIZE * 0.03);
+        
+        image_path = ClassLoader.getSystemResource("Player"+type+"_"+"i"+".png").toString();
+		Image n = new Image(image_path);
+		ellipse.setFill(new ImagePattern(n));
+  
+        ellipse.setStroke(new Color(0,0,0,0));
 
         ellipse.setTranslateX((Board.TILE_SIZE - Board.TILE_SIZE * 0.3125 * 2) / 2);
         ellipse.setTranslateY((Board.TILE_SIZE - Board.TILE_SIZE * 0.26 * 2) / 2);
 
-        getChildren().addAll(bg, ellipse);
+        getChildren().addAll(ellipse);
         
         setOnMousePressed(e -> {
             mouseX = e.getSceneX();
             mouseY = e.getSceneY();
             System.out.println(getCurrentLocation().getX()+" "+getCurrentLocation().getY());
-        });
-        
-        setOnMouseDragged(e -> {
-            relocate(e.getSceneX() - mouseX + oldX, e.getSceneY() - mouseY + oldY);
-            System.out.println(e.getSceneX()- mouseX + oldX); 
         });
         
         setOnMouseClicked(e -> {
@@ -150,7 +157,13 @@ public class Player extends StackPane implements Movable,Bulidable,IRenderable {
 	public void draw(GraphicsContext gc) {
 		// TODO Auto-generated method stub
 		
+		
 	}
 
+	public void update() {
+		// TODO Auto-generated method stub
+		move(getCurrentLocation().getX(),getCurrentLocation().getY());
+		
+	}
 	
 }

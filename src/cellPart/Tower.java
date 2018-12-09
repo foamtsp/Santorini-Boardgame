@@ -1,6 +1,8 @@
 package cellPart;
 
 import boardPart.Location;
+import javafx.scene.image.Image;
+import javafx.scene.paint.ImagePattern;
 
 public class Tower extends Cell{
 	
@@ -38,10 +40,16 @@ public class Tower extends Cell{
 	}
 	
 	public void addLevel() {
-		this.level++;
+		if(this.level <=3 )this.level++;
 		if (this.level > 3) {
 			setDestroyed(true);
 		}
 	}
-
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		 image_path = ClassLoader.getSystemResource("GrassTiles"+getLevel()+".png").toString();
+		 Image n = new Image(image_path);
+		 setFill(new ImagePattern(n));
+	}
 }
