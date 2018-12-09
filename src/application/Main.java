@@ -68,6 +68,7 @@ public class Main extends Application {
 		f.setPrefWidth(150);
 		s = new StatusPage();
 		s.moveBtn.setOnAction(e->{
+			
 			if(board.isP1Turn())
 				try {
 					board.move(board.getP1(), board.getNextMove());

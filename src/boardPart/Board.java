@@ -107,6 +107,16 @@ public class Board extends Pane implements BoardInterface {
 			if (!(current instanceof Tower) /*&& current.getLevel() == 0*/) {
 				Tower currentT = new Tower(location);
 				grid[targetY][targetX] = currentT;
+				grid[targetY][targetX].setOnMouseClicked(e->{
+					if(moved==false) {nextMove = grid[targetY][targetX].getLocation();
+					System.out.println("move to "+nextMove.getX()+" "+nextMove.getY());}
+					else{buildLocation = grid[targetY][targetX].getLocation();
+					System.out.println("build at "+buildLocation.getX()+" "+buildLocation.getY());}
+				});
+
+				tileGroup.getChildren().set(targetY*5+targetX, grid[targetY][targetX]);
+				
+				
 			} else {
 				 //Tower currentT =  ((Tower) current);
 				 ((Tower) grid[targetY][targetX]).addLevel();
@@ -272,6 +282,7 @@ public class Board extends Pane implements BoardInterface {
 				grid[y][x].update();
 			}
 		}
+		
 		
 	}
 
