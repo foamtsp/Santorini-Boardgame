@@ -5,12 +5,17 @@ import java.util.ArrayList;
 
 import boardPart.Board;
 import boardPart.Location;
+import javafx.animation.Animation;
+import javafx.animation.TranslateTransition;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Ellipse;
+import javafx.util.Duration;
 import sharedObject.IRenderable;
 
 public class Player extends StackPane implements Movable,Bulidable,IRenderable {

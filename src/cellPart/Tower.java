@@ -11,6 +11,10 @@ public class Tower extends Cell{
 	public Tower(Location location) {
 		super(location);
 		setLevel(1);
+		image_path = ClassLoader.getSystemResource("GrassTiles"+getLevel()+".png").toString();
+		Image n = new Image(image_path);
+		setFill(new ImagePattern(n));
+
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -48,8 +52,11 @@ public class Tower extends Cell{
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		 image_path = ClassLoader.getSystemResource("GrassTiles"+getLevel()+".png").toString();
-		 Image n = new Image(image_path);
-		 setFill(new ImagePattern(n));
+		 if(getLevel()>0) {
+			 	System.out.println("xxxxxx");
+				image_path = ClassLoader.getSystemResource("GrassTiles"+getLevel()+".png").toString();
+			 	Image n = new Image(image_path);
+			 	setFill(new ImagePattern(n));
+	     }
 	}
 }

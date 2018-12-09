@@ -1,26 +1,15 @@
 package application;
 	
 import boardPart.Board;
-import boardPart.Location;
-import cellPart.Cell;
 import exceptionPart.InvalidBuildException;
 import exceptionPart.InvalidMoveException;
-import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.stage.Stage;
 import playersPart.Player;
-import sharedObject.RenderableHolder;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 
 public class Main extends Application {
@@ -62,13 +51,13 @@ public class Main extends Application {
 			primaryStage.show();
 			
 		});
-		VBox des = new VBox();
+		BorderPane des = new HelpPage();
 		mp.getHelpBtn().setOnAction(e->{
 			/*Canvas canvas = new Canvas(1000,600);
 			GraphicsContext gc = canvas.getGraphicsContext2D(); 	
 			des.getChildren().add(canvas);*/
 			primaryStage.setScene(scene3);
-			primaryStage.setTitle("Santorini");
+			primaryStage.setTitle("Santorini-Help");
 			primaryStage.show();
 			
 		});
@@ -79,7 +68,6 @@ public class Main extends Application {
 		f.setPrefWidth(150);
 		s = new StatusPage();
 		s.moveBtn.setOnAction(e->{
-			while(!board.isGameOver()) {
 			if(board.isP1Turn())
 				try {
 					board.move(board.getP1(), board.getNextMove());
@@ -95,10 +83,8 @@ public class Main extends Application {
 					e1.printStackTrace();
 				}
 			board.update();
-			}
 		});
 		s.buildBtn.setOnAction(e->{
-			while(board.isGameOver()){
 			if(board.isP1Turn())
 				try {
 					board.build(board.getP1(), board.getBuildLocation());
@@ -114,7 +100,6 @@ public class Main extends Application {
 					e1.printStackTrace();
 				}
 			board.update();
-			}
 			
 		});
 		board = new Board();
@@ -131,7 +116,7 @@ public class Main extends Application {
 		});
 		
 		scene2 = new Scene(f,1000,600);
-		scene3 = new Scene(des,1000,600);
+		scene3 = new Scene(des,1000,730);
 		
 		primaryStage.setScene(scene1);
 		primaryStage.setTitle("Santorini");

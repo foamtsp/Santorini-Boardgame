@@ -5,7 +5,6 @@ import boardPart.Location;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
@@ -23,7 +22,6 @@ public class Cell extends Rectangle implements IRenderable{
 	public Cell(Location location) {
 		setWidth(Board.TILE_SIZE);
         setHeight(Board.TILE_SIZE);
-        setFill((location.getX()+location.getY())%2 == 0 ? Color.valueOf("#def") : Color.valueOf("#582"));//setFill(Color.valueOf("#582"));
         relocate(location.getX() * Board.TILE_SIZE, location.getY() * Board.TILE_SIZE);
 		this.location = location;
 		this.player = null;
@@ -42,9 +40,9 @@ public class Cell extends Rectangle implements IRenderable{
 			}
 		});
 		if((location.getX()+location.getY())%2 == 0){
-		image_path = ClassLoader.getSystemResource("GrassTiles"+getLevel()+"x"+".png").toString();
+		this.image_path = ClassLoader.getSystemResource("GrassTiles"+getLevel()+"x"+".png").toString();
 		}
-		else image_path = ClassLoader.getSystemResource("GrassTiles"+getLevel()+"y"+".png").toString();
+		else {this.image_path = ClassLoader.getSystemResource("GrassTiles"+getLevel()+"y"+".png").toString();}
 		Image n = new Image(image_path);
 		setFill(new ImagePattern(n));
 		
@@ -103,7 +101,7 @@ public class Cell extends Rectangle implements IRenderable{
 		 if(getLevel()>0) {
 			image_path = ClassLoader.getSystemResource("GrassTiles"+getLevel()+".png").toString();
 		 	Image n = new Image(image_path);
-		 	setFill(new ImagePattern(n));
+		 	this.setFill(new ImagePattern(n));
 		 }
 	}
 
