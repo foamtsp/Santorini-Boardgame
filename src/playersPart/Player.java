@@ -1,10 +1,10 @@
-package application.Process.Players;
+package playersPart;
 
 
 import java.util.ArrayList;
 
-import application.Process.Board;
-import application.Process.Location;
+import boardPart.Board;
+import boardPart.Location;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;

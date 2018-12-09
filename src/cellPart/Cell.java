@@ -1,8 +1,7 @@
-package application.Process.Cell;
+package cellPart;
 
-import application.Process.Board;
-import application.Process.Location;
-import application.Process.Players.Player;
+import boardPart.Board;
+import boardPart.Location;
 import javafx.event.EventHandler;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -11,6 +10,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
+import playersPart.Player;
 import sharedObject.IRenderable;
 
 public class Cell extends Rectangle implements IRenderable{

@@ -1,8 +1,8 @@
-package application.Process.Players;
+package playersPart;
 
 import java.util.ArrayList;
 
-import application.Process.Location;
+import boardPart.Location;
 
 public interface Movable {
 	

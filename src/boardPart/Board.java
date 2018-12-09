@@ -1,14 +1,14 @@
-package application.Process;
+package boardPart;
 
 import java.util.ArrayList;
 
-import application.Process.Cell.Cell;
-import application.Process.Cell.Tower;
-import application.Process.Exception.InvalidBuildException;
-import application.Process.Exception.InvalidMoveException;
-import application.Process.Players.Player;
+import cellPart.Cell;
+import cellPart.Tower;
+import exceptionPart.InvalidBuildException;
+import exceptionPart.InvalidMoveException;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
+import playersPart.Player;
 
 public class Board extends Pane implements BoardInterface {
 

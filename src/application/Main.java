@@ -1,15 +1,15 @@
 package application;
 	
-import application.Process.Board;
-import application.Process.Location;
-import application.Process.Cell.Cell;
-import application.Process.Exception.InvalidBuildException;
-import application.Process.Exception.InvalidMoveException;
-import application.Process.Players.Player;
+import boardPart.Board;
+import boardPart.Location;
+import cellPart.Cell;
+import exceptionPart.InvalidBuildException;
+import exceptionPart.InvalidMoveException;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
+import playersPart.Player;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -32,16 +32,10 @@ public class Main extends Application {
 		
 		MainPage mp = new MainPage();
 		primaryStage.setResizable(false);
-		
-		HBox hb = new HBox(10);
-		hb.setAlignment(Pos.BOTTOM_RIGHT);
-		Button pbtn = new Button("Play");		
-		Button hbtn = new Button("Help");
-		hb.getChildren().addAll(pbtn,hbtn);
-		mp.add(hb, 1, 3);
-		pbtn.setOnAction(e->{
-			String p1 = mp.t1.getText().trim();
-			String p2 = mp.t2.getText().trim();
+
+		mp.getPlayBtn().setOnAction(e->{
+			String p1 = mp.getT1().getText().trim();
+			String p2 = mp.getT2().getText().trim();
 			board.getP1().setName(p1);
 			board.getP2().setName(p2);
 			/*
@@ -55,7 +49,7 @@ public class Main extends Application {
 			}
 			player2.move(player2.getCurrentLocation().getX(), player2.getCurrentLocation().getX());
 			*/
-			s.setPlayerName(mp.t1.getText().trim(), mp.t2.getText().trim());
+			s.setPlayerName(p1, p2);
 	
 			primaryStage.setScene(scene2);
 			primaryStage.setTitle("Santorini");
@@ -63,7 +57,7 @@ public class Main extends Application {
 			
 		});
 		VBox des = new VBox();
-		hbtn.setOnAction(e->{
+		mp.getHelpBtn().setOnAction(e->{
 			/*Canvas canvas = new Canvas(1000,600);
 			GraphicsContext gc = canvas.getGraphicsContext2D(); 	
 			des.getChildren().add(canvas);*/

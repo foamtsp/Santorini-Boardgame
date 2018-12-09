@@ -1,4 +1,4 @@
-package application.Process.Exception;
+package exceptionPart;
 
 public class InvalidMoveException extends Exception{
 

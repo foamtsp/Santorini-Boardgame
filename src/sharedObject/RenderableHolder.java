@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import application.Process.Cell.Cell;
-import application.Process.Cell.Tower;
-import application.Process.Players.Player;
+import cellPart.Cell;
+import cellPart.Tower;
 import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
+import playersPart.Player;
 
 
 public class RenderableHolder {

@@ -1,8 +1,8 @@
-package application.Process;
+package boardPart;
 
-import application.Process.Exception.InvalidBuildException;
-import application.Process.Exception.InvalidMoveException;
-import application.Process.Players.Player;
+import exceptionPart.InvalidBuildException;
+import exceptionPart.InvalidMoveException;
+import playersPart.Player;
 
 public interface BoardInterface {
 	int SIDE = 5;

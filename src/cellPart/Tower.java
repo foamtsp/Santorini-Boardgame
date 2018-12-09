@@ -1,6 +1,6 @@
-package application.Process.Cell;
+package cellPart;
 
-import application.Process.Location;
+import boardPart.Location;
 
 public class Tower extends Cell{
 	

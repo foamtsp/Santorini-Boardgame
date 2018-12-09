@@ -1,4 +1,4 @@
-package application.Process;
+package boardPart;
 
 public class Location {
 	private int x, y;
