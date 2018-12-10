@@ -13,10 +13,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class StatusPage extends VBox{
-	PlayerTurn p1,p2;
-	Button moveBtn;
-	Button buildBtn;
-	Action[] actions = new Action[2];
+	private PlayerTurn p1,p2;
+	private Button moveBtn;
+	private Button buildBtn;
+	private Button backBtn;
+	private Action[] actions = new Action[2];
 	public StatusPage() {
 		// TODO Auto-generated constructor stub
 		this.setSpacing(20);
@@ -25,6 +26,7 @@ public class StatusPage extends VBox{
 		this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE,null, null)));
 		moveBtn = new Button("MOVE");
 		buildBtn = new Button("BUILD");
+		backBtn = new Button("BACK");
 		actions[0] = new Action("MOVE stage");
 		actions[0].setBackground(new Background(new BackgroundFill(Color.LAWNGREEN,null, null)));
 		actions[1] = new Action("BUILD stage");
@@ -40,9 +42,27 @@ public class StatusPage extends VBox{
 		HBox btns = new HBox();
 		btns.setSpacing(20);
 		btns.getChildren().addAll(moveBtn,buildBtn);
-		this.getChildren().addAll(pt,p1,p2,btns,actions[0],actions[1]);
+		this.getChildren().addAll(pt,p1,p2,btns,actions[0],actions[1],backBtn);
 		//P2SP.setVisible(false);
 		
+	}
+	public PlayerTurn getP1() {
+		return p1;
+	}
+	public PlayerTurn getP2() {
+		return p2;
+	}
+	public Button getMoveBtn() {
+		return moveBtn;
+	}
+	public Button getBuildBtn() {
+		return buildBtn;
+	}
+	public Button getBackBtn() {
+		return backBtn;
+	}
+	public Action[] getActions() {
+		return actions;
 	}
 	public void changeTurn(boolean b) {
 		p1.canvas.setVisible(b);

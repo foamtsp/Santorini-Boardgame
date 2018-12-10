@@ -1,7 +1,5 @@
 package application;
 	
-import java.util.Optional;
-
 import boardPart.Board;
 import exceptionPart.InvalidBuildException;
 import exceptionPart.InvalidMoveException;
@@ -12,8 +10,6 @@ import javafx.util.Duration;
 import playersPart.Player;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
@@ -72,11 +68,10 @@ public class Main extends Application {
 		});
 		scene1 = new Scene(mp,1000,600);
 		BorderPane f = new BorderPane();
-		Button backBtn = new Button("Back");
 		f.setPrefHeight(300);
 		f.setPrefWidth(150);
 		s = new StatusPage();
-		s.moveBtn.setOnAction(e->{
+		s.getMoveBtn().setOnAction(e->{
 			if(board.isP1Turn())
 				try {
 					board.move(board.getP1(), board.getNextMove());
@@ -111,7 +106,7 @@ public class Main extends Application {
 				s.nextAction(1);
 				}
 		});
-		s.buildBtn.setOnAction(e->{
+		s.getBuildBtn().setOnAction(e->{
 			if(board.isP1Turn())
 				try {
 					board.build(board.getP1(), board.getBuildLocation());
@@ -142,14 +137,13 @@ public class Main extends Application {
 		board = new Board();
 		SymbolPage sym = new SymbolPage();
 		f.setLeft(s);
-		f.setBottom(backBtn);
 		f.setRight(sym);
 		BorderPane.setMargin(board, new Insets(10, 5, 5, 10));
 		BorderPane.setMargin(s, new Insets(10, 5, 5, 10));
 		BorderPane.setMargin(sym, new Insets(10, 10, 10, 10));
 		f.setCenter(board);
 		//f.getChildren().addAll(s,g);
-		backBtn.setOnAction(e->{
+		s.getBackBtn().setOnAction(e->{
 			board = new Board();
 			f.setCenter(board);
 			primaryStage.setScene(scene1);
