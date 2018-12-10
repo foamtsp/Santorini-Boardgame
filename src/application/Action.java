@@ -3,13 +3,13 @@ package application;
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-public class Action extends Pane {
+public class Action extends StackPane {
 
 	public Action(String action) {
 		// TODO Auto-generated constructor stub
