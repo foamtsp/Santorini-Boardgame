@@ -54,7 +54,6 @@ public class Tower extends Cell{
 	public void update() {
 		// TODO Auto-generated method stub
 		 if(getLevel()>0) {
-			 	System.out.println("xxxxxx");
 				image_path = ClassLoader.getSystemResource("GrassTiles"+getLevel()+".png").toString();
 			 	Image n = new Image(image_path);
 			 	setFill(new ImagePattern(n));

@@ -76,7 +76,8 @@ public class Main extends Application {
 		f.setPrefWidth(150);
 		s = new StatusPage();
 		s.moveBtn.setOnAction(e->{
-			
+			if(board.isGameOver()) {endGameAlert();}
+			else {
 			if(board.isP1Turn())
 				try {
 					board.move(board.getP1(), board.getNextMove());
@@ -95,12 +96,14 @@ public class Main extends Application {
 				} catch (InvalidMoveException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();Alert alert = new Alert(AlertType.ERROR);
-					alert.setContentText("Can't move to this cell! Please select new cell");
+					alert.setContentText("Can't build at this cell! Please select new cell");
 					alert.setHeaderText("Error!");
 					alert.setTitle("Error");
 					alert.show();
 				}
+			s.changeTurn(board.isP1Turn());
 			board.update();
+			}
 		});
 		s.buildBtn.setOnAction(e->{
 			if(board.isP1Turn())
@@ -125,6 +128,7 @@ public class Main extends Application {
 					alert.setTitle("Error");
 					alert.show();
 				}
+			s.changeTurn(board.isP1Turn());
 			board.update();
 			
 		});
@@ -135,6 +139,8 @@ public class Main extends Application {
 		f.setCenter(board);
 		//f.getChildren().addAll(s,g);
 		backBtn.setOnAction(e->{
+			board = new Board();
+			f.setCenter(board);
 			primaryStage.setScene(scene1);
 			primaryStage.setTitle("Santorini");			
 			primaryStage.show();
@@ -166,6 +172,12 @@ public class Main extends Application {
 		gc.setFont(f2);
 		gc.fillText("Description", 30, 150,800);
 	}*/
-	
+	void endGameAlert(){
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.setContentText("Can't build on this cell! Please select new cell");
+		alert.setHeaderText("Error!");
+		alert.setTitle("Error");
+		alert.show();
+	}
 
 }

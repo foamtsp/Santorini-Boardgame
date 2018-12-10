@@ -5,6 +5,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.BorderStrokeStyle;
+import javafx.scene.layout.BorderWidths;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -16,13 +21,15 @@ public class PlayerTurn extends HBox{
 	Canvas canvas;
 	public PlayerTurn(String p) {
 		// TODO Auto-generated constructor stub
+		setBorder(new Border(new BorderStroke(Color.BLACK, 
+	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		playerName = new Text(p);
 		playerName.setFont(Font.font("Serif",FontWeight.NORMAL,22));
 		canvas = new Canvas(30,30);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
-		gc.fillOval(10, 10, 15, 15);
-		this.setBackground(new Background(new BackgroundFill(Color.WHITE,null, null)));
+		gc.fillOval(7.5, 7.5, 15, 15);
+		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE,null, null)));
 		this.setSpacing(15);
 		this.setPadding(new Insets(15,15,15,15));
 		this.setMaxWidth(240);
