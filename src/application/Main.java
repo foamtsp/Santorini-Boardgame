@@ -3,6 +3,8 @@ package application;
 import boardPart.Board;
 import exceptionPart.InvalidBuildException;
 import exceptionPart.InvalidMoveException;
+import exceptionPart.NullBuildException;
+import exceptionPart.NullMoveException;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
@@ -72,9 +74,11 @@ public class Main extends Application {
 		f.setPrefWidth(150);
 		s = new StatusPage();
 		s.getMoveBtn().setOnAction(e->{
-			if(board.isP1Turn())
+			Player p;
+			if(board.isP1Turn()) p = board.getP1();
+			else p = board.getP2();
 				try {
-					board.move(board.getP1(), board.getNextMove());
+					board.move(p, board.getNextMove());
 				} catch (InvalidMoveException e1) {
 					// TODO Auto-generated catch block
 					Alert alert = new Alert(AlertType.ERROR);
@@ -83,21 +87,20 @@ public class Main extends Application {
 					alert.setTitle("Error");
 					alert.show();
 
-			}
-			else  
-				try {
-					board.move(board.getP2(), board.getNextMove());
-				} catch (InvalidMoveException e1) {
+				}
+				catch (NullMoveException e1) {
 					// TODO Auto-generated catch block
 					Alert alert = new Alert(AlertType.ERROR);
-					alert.setContentText("Can't build at this cell! Please select new cell");
+					alert.setContentText("Please choose your location to move first.");
 					alert.setHeaderText("Error!");
 					alert.setTitle("Error");
 					alert.show();
+
 				}
 			s.changeTurn(board.isP1Turn());
-			s.nextAction(0);
+			if(board.isMoved()) s.nextAction(0);
 			board.update();
+			board.setNextMove(null);
 			if(board.isGameOver()) {
 				Alert alert = new Alert(AlertType.INFORMATION);
 				alert.setHeaderText("Congratulation!!!, "+board.getWinner().getName()+" wins the game.");
@@ -107,9 +110,11 @@ public class Main extends Application {
 				}
 		});
 		s.getBuildBtn().setOnAction(e->{
-			if(board.isP1Turn())
+			Player p;
+			if(board.isP1Turn()) p = board.getP1();
+			else p = board.getP2();
 				try {
-					board.build(board.getP1(), board.getBuildLocation());
+					board.build(p, board.getBuildLocation());
 				} catch (InvalidBuildException e1) {
 					// TODO Auto-generated catch block
 					Alert alert = new Alert(AlertType.ERROR);
@@ -118,20 +123,17 @@ public class Main extends Application {
 					alert.setTitle("Error");
 					alert.show();
 				}
-			else  
-				try {
-					board.build(board.getP2(), board.getBuildLocation());
-				} catch (InvalidBuildException e1) {
-					// TODO Auto-generated catch block
+				catch (NullBuildException e1) {
 					Alert alert = new Alert(AlertType.ERROR);
-					alert.setContentText("Can't build on this cell! Please select new cell");
+					alert.setContentText("Please choose your location to build first.");
 					alert.setHeaderText("Error!");
 					alert.setTitle("Error");
 					alert.show();
 				}
 			s.changeTurn(board.isP1Turn());
-			s.nextAction(1);
+			if(board.isBuilded()) s.nextAction(1);
 			board.update();
+			board.setBuildLocation(null);
 			
 		});
 		board = new Board();

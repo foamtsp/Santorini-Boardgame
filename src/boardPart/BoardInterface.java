@@ -2,6 +2,8 @@ package boardPart;
 
 import exceptionPart.InvalidBuildException;
 import exceptionPart.InvalidMoveException;
+import exceptionPart.NullBuildException;
+import exceptionPart.NullMoveException;
 import playersPart.Player;
 
 public interface BoardInterface {
@@ -11,9 +13,9 @@ public interface BoardInterface {
     public static final int WIDTH = 5;
     public static final int HEIGHT = 5;
 
-	void move(Player p,Location newLocation) throws InvalidMoveException;
+	void move(Player p,Location newLocation) throws InvalidMoveException, NullMoveException;
 	
-	void build(Player p,Location location) throws InvalidBuildException;
+	void build(Player p,Location location) throws InvalidBuildException, NullBuildException;
 	
 	boolean isGameOver();
 

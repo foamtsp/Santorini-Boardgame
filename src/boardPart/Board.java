@@ -6,6 +6,8 @@ import cellPart.Cell;
 import cellPart.Tower;
 import exceptionPart.InvalidBuildException;
 import exceptionPart.InvalidMoveException;
+import exceptionPart.NullBuildException;
+import exceptionPart.NullMoveException;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
@@ -32,7 +34,8 @@ public class Board extends Pane implements BoardInterface {
 	public Board() {
 		// TODO Auto-generated constructor stub
 		super();
-
+		nextMove = null;
+		buildLocation = null;
 		this.setPrefSize(Board.WIDTH * Board.TILE_SIZE, Board.HEIGHT * Board.TILE_SIZE);
 		this.getChildren().addAll(tileGroup, pieceGroup);
 
@@ -71,9 +74,12 @@ public class Board extends Pane implements BoardInterface {
 	}
 
 	@Override
-	public void move(Player p, Location newLocation) throws InvalidMoveException {
+	public void move(Player p, Location newLocation) throws InvalidMoveException, NullMoveException {
 		// TODO Auto-generated method stub
-		if (!(p.tryMove(newLocation)) || isGameOver()|| (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
+		if(newLocation==null) {
+			throw new NullMoveException();
+		}
+		else if (!(p.tryMove(newLocation)) || isGameOver()|| (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
 				|| !(canMove(p, newLocation)) || isMoved() || !isBuilded()) {
 			throw new InvalidMoveException();
 		} else {
@@ -94,10 +100,21 @@ public class Board extends Pane implements BoardInterface {
 		return buildLocation;
 	}
 
+	public void setNextMove(Location nextMove) {
+		this.nextMove = nextMove;
+	}
+
+	public void setBuildLocation(Location buildLocation) {
+		this.buildLocation = buildLocation;
+	}
+
 	@Override
-	public void build(Player p, Location location) throws InvalidBuildException {
+	public void build(Player p, Location location) throws InvalidBuildException, NullBuildException {
 		// TODO Auto-generated method stub
-		if (!(p.tryBuild(location)) || isGameOver() || (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
+		if(location==null) {
+			throw new NullBuildException();
+		}
+		else if (!(p.tryBuild(location)) || isGameOver() || (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
 				|| !(canBuild(p, location)) || isBuilded()) {
 			throw new InvalidBuildException();
 		} else {
