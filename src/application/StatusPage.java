@@ -25,9 +25,9 @@ public class StatusPage extends VBox{
 		this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE,null, null)));
 		moveBtn = new Button("MOVE");
 		buildBtn = new Button("BUILD");
-		actions[0] = new Action("Choose location and MOVE");
+		actions[0] = new Action("MOVE stage");
 		actions[0].setBackground(new Background(new BackgroundFill(Color.LAWNGREEN,null, null)));
-		actions[1] = new Action("Choose location and BUILD");
+		actions[1] = new Action("BUILD stage");
 
 	}
 	public void setPlayerName(String n1,String n2) {
