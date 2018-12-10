@@ -8,7 +8,6 @@ import exceptionPart.InvalidBuildException;
 import exceptionPart.InvalidMoveException;
 import exceptionPart.NullBuildException;
 import exceptionPart.NullMoveException;
-import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import playersPart.Player;
@@ -42,11 +41,14 @@ public class Board extends Pane implements BoardInterface {
 		for (int y = 0; y < 5; y++) {
 			for (int x = 0; x < 5; x++) {
 				Cell c = new Cell(new Location(y, x));
-				c.setOnMouseClicked(e->{
-					if(moved==false) {nextMove = c.getLocation();
-					System.out.println("move to "+nextMove.getX()+" "+nextMove.getY());}
-					else{buildLocation = c.getLocation();
-					System.out.println("build at "+buildLocation.getX()+" "+buildLocation.getY());}
+				c.setOnMouseClicked(e -> {
+					if (moved == false) {
+						nextMove = c.getLocation();
+						System.out.println("move to " + nextMove.getX() + " " + nextMove.getY());
+					} else {
+						buildLocation = c.getLocation();
+						System.out.println("build at " + buildLocation.getX() + " " + buildLocation.getY());
+					}
 				});
 
 				grid[y][x] = c;
@@ -54,8 +56,8 @@ public class Board extends Pane implements BoardInterface {
 			}
 		}
 
-		this.p1 = new Player("p1","1");
-		this.p2 = new Player("p2","2");
+		this.p1 = new Player("p1", "1");
+		this.p2 = new Player("p2", "2");
 		while ((this.p2.getCurrentLocation().getX() == this.p1.getCurrentLocation().getX())
 				&& (this.p2.getCurrentLocation().getY() == this.p1.getCurrentLocation().getY())) {
 			int nx = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
@@ -63,23 +65,22 @@ public class Board extends Pane implements BoardInterface {
 			this.p2.setCurrentLocation(new Location(ny, nx));
 		}
 		this.p2.move(this.p2.getCurrentLocation().getX(), this.p2.getCurrentLocation().getY());
-		
+
 		grid[this.p1.getCurrentLocation().getY()][this.p1.getCurrentLocation().getX()].setPlayer(this.p1);
 		grid[this.p2.getCurrentLocation().getY()][this.p2.getCurrentLocation().getX()].setPlayer(this.p2);
-		
+
 		pieceGroup.getChildren().addAll(this.p1, this.p2);
-		System.out.println("p1: "+p1.getCurrentLocation().getX()+","+p1.getCurrentLocation().getY());
-		System.out.println("p2: "+p2.getCurrentLocation().getX()+","+p2.getCurrentLocation().getY());
-	
+		System.out.println("p1: " + p1.getCurrentLocation().getX() + "," + p1.getCurrentLocation().getY());
+		System.out.println("p2: " + p2.getCurrentLocation().getX() + "," + p2.getCurrentLocation().getY());
+
 	}
 
 	@Override
 	public void move(Player p, Location newLocation) throws InvalidMoveException, NullMoveException {
 		// TODO Auto-generated method stub
-		if(newLocation==null) {
+		if (newLocation == null) {
 			throw new NullMoveException();
-		}
-		else if (!(p.tryMove(newLocation)) || isGameOver()|| (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
+		} else if (!(p.tryMove(newLocation)) || isGameOver() || (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
 				|| !(canMove(p, newLocation)) || isMoved() || !isBuilded()) {
 			throw new InvalidMoveException();
 		} else {
@@ -88,11 +89,12 @@ public class Board extends Pane implements BoardInterface {
 			grid[targetY][targetX].setPlayer(p);
 			grid[p.getCurrentLocation().getY()][p.getCurrentLocation().getX()].setPlayer(null);
 			p.setCurrentLocation(new Location(targetY, targetX));
-			//p.move(targetX, targetY);
-			System.out.println(p.getName()+" is at "+p.getCurrentLocation().getX()+","+p.getCurrentLocation().getY());
+			// p.move(targetX, targetY);
+			System.out.println(
+					p.getName() + " is at " + p.getCurrentLocation().getX() + "," + p.getCurrentLocation().getY());
 			this.moved = true;
 			this.builded = false;
-			//this.p1Turn = !this.p1Turn;
+			// this.p1Turn = !this.p1Turn;
 		}
 	}
 
@@ -111,10 +113,9 @@ public class Board extends Pane implements BoardInterface {
 	@Override
 	public void build(Player p, Location location) throws InvalidBuildException, NullBuildException {
 		// TODO Auto-generated method stub
-		if(location==null) {
+		if (location == null) {
 			throw new NullBuildException();
-		}
-		else if (!(p.tryBuild(location)) || isGameOver() || (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
+		} else if (!(p.tryBuild(location)) || isGameOver() || (p1Turn && p == p2) || ((!(p1Turn) && p == p1))
 				|| !(canBuild(p, location)) || isBuilded()) {
 			throw new InvalidBuildException();
 		} else {
@@ -123,24 +124,27 @@ public class Board extends Pane implements BoardInterface {
 			int targetY = location.getY();
 
 			Cell current = grid[targetY][targetX];
-			if (!(current instanceof Tower) /*&& current.getLevel() == 0*/) {
+			if (!(current instanceof Tower) /* && current.getLevel() == 0 */) {
 				Tower currentT = new Tower(location);
 				grid[targetY][targetX] = currentT;
-				grid[targetY][targetX].setOnMouseClicked(e->{
-					if(moved==false) {nextMove = grid[targetY][targetX].getLocation();
-					System.out.println("move to "+nextMove.getX()+" "+nextMove.getY());}
-					else{buildLocation = grid[targetY][targetX].getLocation();
-					System.out.println("build at "+buildLocation.getX()+" "+buildLocation.getY());}
+				grid[targetY][targetX].setOnMouseClicked(e -> {
+					if (moved == false) {
+						nextMove = grid[targetY][targetX].getLocation();
+						System.out.println("move to " + nextMove.getX() + " " + nextMove.getY());
+					} else {
+						buildLocation = grid[targetY][targetX].getLocation();
+						System.out.println("build at " + buildLocation.getX() + " " + buildLocation.getY());
+					}
 				});
 
-				tileGroup.getChildren().set(targetY*5+targetX, grid[targetY][targetX]);
-				
-				
+				tileGroup.getChildren().set(targetY * 5 + targetX, grid[targetY][targetX]);
+
 			} else {
-				 //Tower currentT =  ((Tower) current);
-				 ((Tower) grid[targetY][targetX]).addLevel();
+				// Tower currentT = ((Tower) current);
+				((Tower) grid[targetY][targetX]).addLevel();
 			}
-			System.out.println(getBuildLocation().getX()+","+getBuildLocation().getY()+" has tower level"+((Tower)grid[targetY][targetX]).getLevel());
+			System.out.println(getBuildLocation().getX() + "," + getBuildLocation().getY() + " has tower level"
+					+ ((Tower) grid[targetY][targetX]).getLevel());
 			this.moved = false;
 			this.builded = true;
 			this.p1Turn = !this.p1Turn;
@@ -229,7 +233,7 @@ public class Board extends Pane implements BoardInterface {
 
 		Cell targetCell = grid[location.getY()][location.getX()];
 
-		if (!(p.tryBuild(location)) ||  targetCell.isDestroyed() || targetCell.getPlayer() != null) {
+		if (!(p.tryBuild(location)) || targetCell.isDestroyed() || targetCell.getPlayer() != null) {
 			return false;
 		}
 		return true;
@@ -292,17 +296,17 @@ public class Board extends Pane implements BoardInterface {
 	public void setP1Turn(boolean p1Turn) {
 		this.p1Turn = p1Turn;
 	}
-	
+
 	public void update() {
 		getP1().update();
 		getP2().update();
 		for (int y = 0; y < 5; y++) {
 			for (int x = 0; x < 5; x++) {
-				grid[y][x].update();
+				if (grid[y][x] instanceof Tower)
+					((Tower) grid[y][x]).update();
 			}
 		}
-		
-		
+
 	}
 
 }
