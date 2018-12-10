@@ -39,11 +39,6 @@ public class Tower extends Cell{
 		return level;
 	}
 	
-	@Override
-	public int getZ() {
-		return 2;	
-	}
-	
 	public void addLevel() {
 		if(this.level <=3 )this.level++;
 		if (this.level > 3) {

@@ -3,16 +3,14 @@ package cellPart;
 import boardPart.Board;
 import boardPart.Location;
 import javafx.event.EventHandler;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import playersPart.Player;
-import sharedObject.IRenderable;
 
-public class Cell extends Rectangle implements IRenderable{
+public class Cell extends Rectangle {
 	
 	protected Player player;
 	protected Location location;
@@ -76,21 +74,6 @@ public class Cell extends Rectangle implements IRenderable{
 		return 0;
 	}
 
-	@Override
-	public int getZ() {
-		// TODO Auto-generated method stub
-		return 1;
-	}
-
-	@Override
-	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
-		for(int i = 0 ; i<getLevel() ; i++) {
-			gc.fillRect(getLocation().getX(),getLocation().getY(),8,3);
-		}
-		
-		
-	}
 
 	public boolean isDestroyed() {
 		// TODO Auto-generated method stub
