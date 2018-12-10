@@ -4,7 +4,6 @@ package application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -15,14 +14,10 @@ import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 public class MainPage extends GridPane{
 	private ImageView title;
 	private TextField t1,t2;
-	private BackgroundImage myBI;
 	private Image img;
 	private Button playBtn, helpBtn;
 	public MainPage() {
@@ -36,8 +31,16 @@ public class MainPage extends GridPane{
 		title = new ImageView(n);
 		t1 = new TextField();
 		t1.setPromptText("Player1");
+		t1.setOnKeyTyped(event ->{
+	        int maxCharacters = 7;
+	        if(t1.getText().length() > maxCharacters) event.consume();
+	    });
 		t2 = new TextField();
 		t2.setPromptText("Player2");
+		t2.setOnKeyTyped(event ->{
+	        int maxCharacters = 7;
+	        if(t2.getText().length() > maxCharacters) event.consume();
+	    });
 		img = new Image("bcmp.jpg");
 		this.setBackground(new Background(new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
 				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false))));
