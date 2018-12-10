@@ -24,7 +24,7 @@ public class PlayerTurn extends HBox{
 		setBorder(new Border(new BorderStroke(Color.BLACK, 
 	            BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 		playerName = new Text(p);
-		playerName.setFont(Font.font("Serif",FontWeight.NORMAL,22));
+		playerName.setFont(Font.font("LillyBelle",FontWeight.NORMAL,22));
 		canvas = new Canvas(30,30);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);

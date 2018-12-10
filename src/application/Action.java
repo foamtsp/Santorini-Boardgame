@@ -18,7 +18,7 @@ public class Action extends StackPane {
 		setHeight(40);
 		this.setBackground(new Background(new BackgroundFill(Color.WHITE,null, null)));
 		Text act = new Text(action);
-		act.setFont(Font.font("Angsana New", FontWeight.NORMAL, 30));
+		act.setFont(Font.font("LillyBelle", FontWeight.NORMAL, 30));
 		setPadding(new Insets(10,10,10,10));
 		act.relocate(10, 10);
 		setAlignment(Pos.CENTER);

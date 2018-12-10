@@ -4,8 +4,13 @@ package application;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
@@ -23,21 +28,29 @@ public class StatusPage extends VBox{
 		this.setSpacing(20);
 		this.setPadding(new Insets(5,5,5,5));
 		this.setPrefWidth(250);
-		this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE,null, null)));
+		this.setPrefHeight(580);
+		String image_path = ClassLoader.getSystemResource("Statusbg"+".jpg").toString();
+		Image n = new Image(image_path);
+		this.setBackground(new Background(new BackgroundImage(n, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false))));
 		moveBtn = new Button("MOVE");
+		moveBtn.setFont(Font.font("LillyBelle",FontWeight.NORMAL,16));
 		buildBtn = new Button("BUILD");
+		buildBtn.setFont(Font.font("LillyBelle",FontWeight.NORMAL,16));
 		backBtn = new Button("BACK");
-		actions[0] = new Action("MOVE stage");
+		backBtn.setFont(Font.font("LillyBelle",FontWeight.NORMAL,16));
+		actions[0] = new Action("MOVE STAGE");
 		actions[0].setBackground(new Background(new BackgroundFill(Color.LAWNGREEN,null, null)));
-		actions[1] = new Action("BUILD stage");
+		actions[1] = new Action("BUILD STAGE");
 
 	}
 	public void setPlayerName(String n1,String n2) {
 		this.getChildren().clear();
-		Label pt = new Label("Player's turn:");
-		pt.setFont(Font.font("Serif",FontWeight.NORMAL,32));
-		p1 = new PlayerTurn("player1:"+n1);
-		p2 = new PlayerTurn("player2:"+n2);
+		Label pt = new Label(" Player's turn:");
+		//setAlignment(Pos.CENTER);
+		pt.setFont(Font.font("LillyBelle",FontWeight.NORMAL,30));
+		p1 = new PlayerTurn("player1 : "+n1);
+		p2 = new PlayerTurn("player2 : "+n2);
 		p2.canvas.setVisible(false);
 		HBox btns = new HBox();
 		btns.setSpacing(20);

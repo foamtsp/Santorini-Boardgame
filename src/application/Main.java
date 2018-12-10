@@ -13,7 +13,10 @@ import playersPart.Player;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -137,13 +140,19 @@ public class Main extends Application {
 			
 		});
 		board = new Board();
+		VBox gameScreen = new VBox();
+		String image_path = ClassLoader.getSystemResource("Character"+".jpg").toString();
+		Image n = new Image(image_path);
+		ImageView img = new ImageView(n); 
+		gameScreen.setPrefHeight(600);
+		gameScreen.getChildren().addAll(board,img);
 		SymbolPage sym = new SymbolPage();
 		f.setLeft(s);
 		f.setRight(sym);
-		BorderPane.setMargin(board, new Insets(10, 5, 5, 10));
+		BorderPane.setMargin(gameScreen, new Insets(10, 5, 5, 10));
 		BorderPane.setMargin(s, new Insets(10, 5, 5, 10));
 		BorderPane.setMargin(sym, new Insets(10, 10, 10, 10));
-		f.setCenter(board);
+		f.setCenter(gameScreen);
 		//f.getChildren().addAll(s,g);
 		s.getBackBtn().setOnAction(e->{
 			board = new Board();
@@ -154,7 +163,7 @@ public class Main extends Application {
 			
 		});
 		
-		scene2 = new Scene(f,1050,650);
+		scene2 = new Scene(f,1050,620);
 		scene3 = new Scene(des,1000,730);
 		
 		primaryStage.setScene(scene1);
