@@ -16,14 +16,18 @@ public class StatusPage extends VBox{
 	PlayerTurn p1,p2;
 	Button moveBtn;
 	Button buildBtn;
+	Action[] actions = new Action[2];
 	public StatusPage() {
 		// TODO Auto-generated constructor stub
-		this.setSpacing(5);
+		this.setSpacing(20);
 		this.setPadding(new Insets(5,5,5,5));
 		this.setMaxWidth(250);
 		this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE,null, null)));
 		moveBtn = new Button("MOVE");
 		buildBtn = new Button("BUILD");
+		actions[0] = new Action("Choose location and MOVE");
+		actions[0].setBackground(new Background(new BackgroundFill(Color.LAWNGREEN,null, null)));
+		actions[1] = new Action("Choose location and BUILD");
 
 	}
 	public void setPlayerName(String n1,String n2) {
@@ -36,7 +40,7 @@ public class StatusPage extends VBox{
 		HBox btns = new HBox();
 		btns.setSpacing(20);
 		btns.getChildren().addAll(moveBtn,buildBtn);
-		this.getChildren().addAll(pt,p1,p2,btns);
+		this.getChildren().addAll(pt,p1,p2,btns,actions[0],actions[1]);
 		//P2SP.setVisible(false);
 		
 	}
@@ -44,7 +48,8 @@ public class StatusPage extends VBox{
 		p1.canvas.setVisible(b);
 		p2.canvas.setVisible(!b);
 	}
-
-
-
+	public void nextAction(int n) {
+		actions[n%2].setBackground(new Background(new BackgroundFill(Color.WHITE,null, null)));
+		actions[(n+1)%2].setBackground(new Background(new BackgroundFill(Color.LAWNGREEN,null, null)));
+	}
 }

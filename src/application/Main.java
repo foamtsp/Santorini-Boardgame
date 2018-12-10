@@ -102,6 +102,7 @@ public class Main extends Application {
 					alert.show();
 				}
 			s.changeTurn(board.isP1Turn());
+			s.nextAction(0);
 			board.update();
 			}
 		});
@@ -129,6 +130,7 @@ public class Main extends Application {
 					alert.show();
 				}
 			s.changeTurn(board.isP1Turn());
+			s.nextAction(1);
 			board.update();
 			
 		});
