@@ -28,7 +28,7 @@ public class Cell extends Rectangle {
 			@Override
 			public void handle(MouseEvent event) {
 				setStroke(Color.YELLOW);
-				setStrokeWidth(10);
+				setStrokeWidth(5);
 			}
 		});
 		setOnMouseExited(new EventHandler<MouseEvent>() {

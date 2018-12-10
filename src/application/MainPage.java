@@ -45,8 +45,8 @@ public class MainPage extends GridPane{
 	        int maxCharacters = 5;
 	        if(t2.getText().length() > maxCharacters) event.consume();
 	    });
-		
-		img = new Image("bcmp.jpg");
+		String image_pathBg = ClassLoader.getSystemResource("bcmp.jpg").toString();
+		img = new Image(image_pathBg);
 		this.setBackground(new Background(new BackgroundImage(img, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
 				new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false))));
 		this.add(title,1,0,1,1);
