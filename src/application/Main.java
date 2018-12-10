@@ -42,7 +42,9 @@ public class Main extends Application {
 
 		mp.getPlayBtn().setOnAction(e->{
 			String p1 = mp.getT1().getText().trim();
+			if(p1.length()==0) p1 = "P1";
 			String p2 = mp.getT2().getText().trim();
+			if(p2.length()==0) p2 = "P2";
 			board.getP1().setName(p1);
 			board.getP2().setName(p2);
 			s.setPlayerName(p1, p2);
@@ -138,9 +140,13 @@ public class Main extends Application {
 			
 		});
 		board = new Board();
+		SymbolPage sym = new SymbolPage();
 		f.setLeft(s);
 		f.setBottom(backBtn);
-		f.setMargin(s, new Insets(10, 10, 10, 10));
+		f.setRight(sym);
+		BorderPane.setMargin(board, new Insets(10, 5, 5, 10));
+		BorderPane.setMargin(s, new Insets(10, 5, 5, 10));
+		BorderPane.setMargin(sym, new Insets(10, 10, 10, 10));
 		f.setCenter(board);
 		//f.getChildren().addAll(s,g);
 		backBtn.setOnAction(e->{
@@ -152,7 +158,7 @@ public class Main extends Application {
 			
 		});
 		
-		scene2 = new Scene(f,1000,600);
+		scene2 = new Scene(f,1050,650);
 		scene3 = new Scene(des,1000,730);
 		
 		primaryStage.setScene(scene1);

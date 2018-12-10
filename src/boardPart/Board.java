@@ -6,6 +6,7 @@ import cellPart.Cell;
 import cellPart.Tower;
 import exceptionPart.InvalidBuildException;
 import exceptionPart.InvalidMoveException;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.layout.Pane;
 import playersPart.Player;
