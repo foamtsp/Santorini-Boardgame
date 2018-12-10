@@ -21,7 +21,7 @@ public class StatusPage extends VBox{
 		// TODO Auto-generated constructor stub
 		this.setSpacing(20);
 		this.setPadding(new Insets(5,5,5,5));
-		this.setMaxWidth(250);
+		this.setPrefWidth(250);
 		this.setBackground(new Background(new BackgroundFill(Color.CORNFLOWERBLUE,null, null)));
 		moveBtn = new Button("MOVE");
 		buildBtn = new Button("BUILD");

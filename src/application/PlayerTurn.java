@@ -28,7 +28,7 @@ public class PlayerTurn extends HBox{
 		canvas = new Canvas(30,30);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.setFill(Color.BLACK);
-		gc.fillOval(7.5, 7.5, 15, 15);
+		gc.fillOval(5, 5, 20, 20);
 		this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE,null, null)));
 		this.setSpacing(15);
 		this.setPadding(new Insets(15,15,15,15));

@@ -1,6 +1,7 @@
 package application;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
@@ -20,6 +21,7 @@ public class Action extends StackPane {
 		act.setFont(Font.font("Angsana New", FontWeight.NORMAL, 30));
 		setPadding(new Insets(10,10,10,10));
 		act.relocate(10, 10);
+		setAlignment(Pos.CENTER);
 		getChildren().add(act);
 	}
 

@@ -6,13 +6,15 @@ import exceptionPart.InvalidMoveException;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import playersPart.Player;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Main extends Application {
 	Scene scene1,scene2,scene3;
@@ -20,12 +22,17 @@ public class Main extends Application {
 	Player player2;
 	StatusPage s;
 	Board board;
-	public static AudioClip bgmSound;
+	public static MediaPlayer bgmSound;
 	@Override
 	public void start(Stage primaryStage) {
 		
-		bgmSound = new AudioClip(ClassLoader.getSystemResource("bgm.mp3").toString());
-		bgmSound.setVolume(1.0);
+		bgmSound = new MediaPlayer(new Media(ClassLoader.getSystemResource("bgm2.mp3").toString()));
+		bgmSound.setVolume(1.0);	
+		bgmSound.setOnEndOfMedia(new Runnable() {
+		       public void run() {
+		    	   bgmSound.seek(Duration.ZERO);
+		       }
+		   });
 		bgmSound.play();
 		MainPage mp = new MainPage();
 		primaryStage.setResizable(false);
