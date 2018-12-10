@@ -1,5 +1,7 @@
 package application;
 	
+import java.util.Optional;
+
 import boardPart.Board;
 import exceptionPart.InvalidBuildException;
 import exceptionPart.InvalidMoveException;
@@ -11,6 +13,7 @@ import playersPart.Player;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.media.Media;
@@ -42,17 +45,6 @@ public class Main extends Application {
 			String p2 = mp.getT2().getText().trim();
 			board.getP1().setName(p1);
 			board.getP2().setName(p2);
-			/*
-			player1 = new Player(p1);
-			player2 = new Player(p2);
-			while ((player2.getCurrentLocation().getX() == player1.getCurrentLocation().getX())
-					&& (player2.getCurrentLocation().getY() == player1.getCurrentLocation().getY())) {
-				int nx = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
-				int ny = (int) ((Math.random() * ((4 - 0) + 1)) + 0);
-				player2.setCurrentLocation(new Location(ny, nx));
-			}
-			player2.move(player2.getCurrentLocation().getX(), player2.getCurrentLocation().getX());
-			*/
 			s.setPlayerName(p1, p2);
 	
 			primaryStage.setScene(scene2);
@@ -83,8 +75,6 @@ public class Main extends Application {
 		f.setPrefWidth(150);
 		s = new StatusPage();
 		s.moveBtn.setOnAction(e->{
-			if(board.isGameOver()) {endGameAlert();}
-			else {
 			if(board.isP1Turn())
 				try {
 					board.move(board.getP1(), board.getNextMove());
@@ -102,7 +92,7 @@ public class Main extends Application {
 					board.move(board.getP2(), board.getNextMove());
 				} catch (InvalidMoveException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();Alert alert = new Alert(AlertType.ERROR);
+					Alert alert = new Alert(AlertType.ERROR);
 					alert.setContentText("Can't build at this cell! Please select new cell");
 					alert.setHeaderText("Error!");
 					alert.setTitle("Error");
@@ -111,7 +101,13 @@ public class Main extends Application {
 			s.changeTurn(board.isP1Turn());
 			s.nextAction(0);
 			board.update();
-			}
+			if(board.isGameOver()) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Congratulation!!!, "+board.getWinner().getName()+" wins the game.");
+				alert.setTitle("Congratulation!!!");
+				alert.show();
+				s.nextAction(1);
+				}
 		});
 		s.buildBtn.setOnAction(e->{
 			if(board.isP1Turn())
@@ -182,11 +178,12 @@ public class Main extends Application {
 		gc.fillText("Description", 30, 150,800);
 	}*/
 	void endGameAlert(){
-		Alert alert = new Alert(AlertType.ERROR);
-		alert.setContentText("Can't build on this cell! Please select new cell");
-		alert.setHeaderText("Error!");
-		alert.setTitle("Error");
+		Alert alert = new Alert(AlertType.INFORMATION);
+		alert.setHeaderText(board.getWinner().getName()+" wins the game.");
+		alert.setTitle("Congratulation!!!");
 		alert.show();
+		board = new Board();
+		s.nextAction(1);
 	}
 
 }
