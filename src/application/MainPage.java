@@ -35,14 +35,14 @@ public class MainPage extends GridPane{
 		t1.setPromptText("Player1");
 		t1.setFont(Font.font("LillyBelle",FontWeight.NORMAL,16));
 		t1.setOnKeyTyped(event ->{
-	        int maxCharacters = 4;
+	        int maxCharacters = 5;
 	        if(t1.getText().length() > maxCharacters) event.consume();
 	    });
 		t2 = new TextField();
 		t2.setFont(Font.font("LillyBelle",FontWeight.NORMAL,16));
 		t2.setPromptText("Player2");
 		t2.setOnKeyTyped(event ->{
-	        int maxCharacters = 4;
+	        int maxCharacters = 5;
 	        if(t2.getText().length() > maxCharacters) event.consume();
 	    });
 		

@@ -137,7 +137,13 @@ public class Main extends Application {
 			if(board.isBuilded()) s.nextAction(1);
 			board.update();
 			board.setBuildLocation(null);
-			
+			if(board.isGameOver()) {
+				Alert alert = new Alert(AlertType.INFORMATION);
+				alert.setHeaderText("Congratulation!!!, "+board.getWinner().getName()+" wins the game.");
+				alert.setTitle("Congratulation!!!");
+				alert.show();
+				s.nextAction(1);
+				}
 		});
 		board = new Board();
 		VBox gameScreen = new VBox();
@@ -156,7 +162,8 @@ public class Main extends Application {
 		//f.getChildren().addAll(s,g);
 		s.getBackBtn().setOnAction(e->{
 			board = new Board();
-			f.setCenter(board);
+			gameScreen.getChildren().clear();
+			gameScreen.getChildren().addAll(board,img);
 			primaryStage.setScene(scene1);
 			primaryStage.setTitle("Santorini");			
 			primaryStage.show();
